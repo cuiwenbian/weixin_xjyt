@@ -11,6 +11,62 @@
 			"style": {
 				"navigationStyle":"custom"
 			}
+		},
+		{
+			"path": "pages/login/login",
+			"style": {
+				"navigationStyle":"custom"
+			}
+		},
+		{
+			"path": "pages/register/register",
+			"style": {
+				"navigationStyle":"custom"
+			}
+		},
+		{
+			"path": "pages/moreNews/moreNews",
+			"style": {
+				"navigationBarTitleText": "资讯列表"
+			}
+		},
+		{
+			"path": "pages/web1/web1",
+			"style": {
+				"navigationBarTitleText": "星际云通"
+			}
+		},
+		{
+			"path": "pages/web2/web2",
+			"style": {
+				"navigationBarTitleText": "星际云通"
+			}
+		},
+		{
+			"path": "pages/banner/banner",
+			"style": {
+				"navigationStyle": "custom"
+		
+			}
+		},
+		{
+			"path": "pages/banner2/banner2",
+			"style": {
+				"navigationStyle": "custom"
+		
+			}
+		},
+		{
+			"path": "pages/banner3/banner3",
+			"style": {
+		        "navigationBarTitleText": "公告"
+			}
+		},
+		{
+			"path": "pages/announcement/announcement",
+			"style": {
+				"navigationBarTitleText": "官方公告"
+			}
 		}
 	],
 	"subPackages": [

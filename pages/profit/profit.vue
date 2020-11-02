@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<wTitleBar title="æ˜Ÿé™…äº‘é€š" textColor="#fff" @open="open"></wTitleBar>
+		<!-- <wTitleBar title="ÐÇ¼ÊÔÆÍ¨" textColor="#fff" @open="open"></wTitleBar> -->
 	</view>
 </template>
 
