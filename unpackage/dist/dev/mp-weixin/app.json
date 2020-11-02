@@ -3,7 +3,14 @@
     "pages/index/index",
     "pages/profit/profit"
   ],
-  "subPackages": [],
+  "subPackages": [
+    {
+      "root": "my",
+      "pages": [
+        "power/power"
+      ]
+    }
+  ],
   "window": {
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "uni-app",

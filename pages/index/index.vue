@@ -5,11 +5,11 @@
 		<carousel :img-list="imgList" url-key="url" @selected="selectedBanner" />
 		<view class="content">
 			<view class="ban_btns">
-				<view class="machine_btn">
+				<view class="machine_btn" @click="mymachine">
 					<image src="../../static/image/machine_icon.png" style="width:70rpx;height:56rpx;" mode=""></image>
 					<view>我的服务器</view>
 				</view>
-				<view class="machine_btn">
+				<view class="machine_btn" @click="mypower">
 					<image src="../../static/image/power_icon.png" style="width:77rpx;height:49rpx;" mode=""></image>
 					<view>我的存力</view>
 				</view>
@@ -60,6 +60,7 @@
 
 <script>
 import carousel from '@/components/vear-carousel/vear-carousel';
+import {debounce} from '@/common/utils.js';
 import hjDragabledrawer from '@/components/hj-dragabledrawer/hj-dragabledrawer.vue';
 let dragBox;
 export default {
@@ -141,7 +142,31 @@ export default {
 				title: 'close',
 				icon: 'none'
 			});
-		}
+		},
+		linkToTransfer: debounce(
+			function() {
+				uni.navigateTo({
+					url: '../../my/power/power'
+				});
+			},
+			1000,
+			true
+		),
+		mypower: function() {
+			this.linkToTransfer();
+		},
+		mymachine:function(){
+			this.linkToTransfer1();
+		},
+		linkToTransfer1: debounce(
+			function() {
+				uni.navigateTo({
+					url: '../../my/machine/machine'
+				});
+			},
+			1000,
+			true
+		),
 	}
 };
 </script>

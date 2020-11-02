@@ -9,8 +9,28 @@
 		{
 			"path": "pages/profit/profit",
 			"style": {
-				"navigationBarTitleText": "收益"
+				"navigationStyle":"custom"
 			}
+		}
+	],
+	"subPackages": [
+		{
+			"root": "my",
+			"pages": [
+				{
+					"path": "power/power",
+					"style": {
+						"navigationBarTitleText": "我的存力"
+					}
+				},
+				{
+					"path": "machine/machine",
+					"style": {
+						"navigationBarTitleText": "我的服务器"
+					}
+				}
+	
+			]
 		}
 	],
 	"tabBar": {

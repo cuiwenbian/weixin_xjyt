@@ -8881,6 +8881,123 @@ if (hadRuntime) {
 );
 
 
+/***/ }),
+
+/***/ 62:
+/*!**************************************************!*\
+  !*** E:/云相册/星际云通小程序/weixin_xjyt/common/utils.js ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function timer(that) {
+  // var that = this;
+  var promise = new Promise(function (resolve, reject) {
+    var setTimer = setInterval(function () {
+
+      that.second = that.second - 1;
+
+      if (that.second <= 0) {
+
+        that.send = true,
+        that.alreadySend = false,
+        that.second = 60;
+
+        resolve(setTimer);
+      }
+    }, 1000);
+  });
+  promise.then(function (setTimer) {
+    clearInterval(setTimer);
+  });
+}
+function checkEmail(email) {
+  var str = /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/;
+  if (str.test(email)) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function checkPhoneNum(phoneNumber) {
+  var str = /^1\d{10}$/;
+  if (str.test(phoneNumber)) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+
+
+function checkIdcard(idcard) {
+  var str = /^[1-9]\d{5}(18|19|20|(3\d))\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/;;
+  if (str.test(idcard)) {
+    return true;
+  } else {
+    return false;
+  }
+}
+var formatTime = function formatTime(date) {
+  var year = date.getFullYear();
+  var month = date.getMonth() + 1;
+  var day = date.getDate();
+  var hour = date.getHours();
+  var minute = date.getMinutes();
+  var second = date.getSeconds();
+
+  return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':');
+};
+
+var formatNumber = function formatNumber(n) {
+  n = n.toString();
+  return n[1] ? n : '0' + n;
+};
+var formatMonth = function formatMonth(data) {
+  var month = data.getMonth() + 1;
+  return month;
+};
+function renderTime(date) {
+  var dateee = new Date(date).toJSON();
+  return new Date(+new Date(dateee) + 8 * 3600 * 1000).toISOString().replace(/T/g, ' ').replace(/\.[\d]{3}Z/, '');
+}
+//防抖
+function debounce(fn) {var wait = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 500;var isImmediate = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+  var timerId = null;
+  var flag = true;
+  if (isImmediate) {
+    return function () {
+      clearTimeout(timerId);
+      if (flag) {
+        fn.apply(this, arguments);
+        flag = false;
+      }
+      timerId = setTimeout(function () {
+        flag = true;
+      }, wait);
+    };
+  }
+  return function () {var _arguments = arguments,_this = this;
+    clearTimeout(timerId);
+    timerId = setTimeout(function () {
+      fn.apply(_this, _arguments);
+    }, wait);
+  };
+}
+
+
+module.exports = {
+  checkEmail: checkEmail,
+  checkPhoneNum: checkPhoneNum,
+  // checkPassword: checkPassword,
+  checkIdcard: checkIdcard,
+  timer: timer,
+  formatTime: formatTime,
+  formatMonth: formatMonth,
+  renderTime: renderTime,
+  debounce: debounce };
+
 /***/ })
 
 }]);

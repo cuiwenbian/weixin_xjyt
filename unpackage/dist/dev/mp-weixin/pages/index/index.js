@@ -141,7 +141,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var carousel = function carousel() {__webpack_require__.e(/*! require.ensure | components/vear-carousel/vear-carousel */ "components/vear-carousel/vear-carousel").then((function () {return resolve(__webpack_require__(/*! @/components/vear-carousel/vear-carousel */ 44));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var hjDragabledrawer = function hjDragabledrawer() {Promise.all(/*! require.ensure | components/hj-dragabledrawer/hj-dragabledrawer */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/hj-dragabledrawer/hj-dragabledrawer")]).then((function () {return resolve(__webpack_require__(/*! @/components/hj-dragabledrawer/hj-dragabledrawer.vue */ 34));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
 
 
@@ -203,6 +203,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+var _utils = __webpack_require__(/*! @/common/utils.js */ 62);var carousel = function carousel() {__webpack_require__.e(/*! require.ensure | components/vear-carousel/vear-carousel */ "components/vear-carousel/vear-carousel").then((function () {return resolve(__webpack_require__(/*! @/components/vear-carousel/vear-carousel */ 44));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var hjDragabledrawer = function hjDragabledrawer() {Promise.all(/*! require.ensure | components/hj-dragabledrawer/hj-dragabledrawer */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/hj-dragabledrawer/hj-dragabledrawer")]).then((function () {return resolve(__webpack_require__(/*! @/components/hj-dragabledrawer/hj-dragabledrawer.vue */ 34));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
 
 var dragBox;var _default =
 {
@@ -284,6 +285,18 @@ var dragBox;var _default =
         title: 'close',
         icon: 'none' });
 
+    },
+    linkToTransfer: (0, _utils.debounce)(
+    function () {
+      uni.navigateTo({
+        url: '../../my/power/power' });
+
+    },
+    1000,
+    true),
+
+    mypower: function mypower() {
+      this.linkToTransfer();
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
