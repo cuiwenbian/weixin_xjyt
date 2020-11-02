@@ -1,0 +1,40 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/profit/profit"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "color": "#7A7E83",
+    "selectedColor": "#1665E3",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "height": "98px",
+    "fontSize": "10px",
+    "iconWidth": "22px",
+    "spacing": "3px",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "static/image/tab_icon2.png",
+        "selectedIconPath": "static/image/tab_icon1.png",
+        "text": "组件"
+      },
+      {
+        "pagePath": "pages/profit/profit",
+        "iconPath": "static/image/tab_icon2.png",
+        "selectedIconPath": "static/image/tab_icon1.png",
+        "text": "接口"
+      }
+    ]
+  },
+  "usingComponents": {
+    "w-title-bar": "/components/w-titleBar/w-titleBar"
+  }
+}
