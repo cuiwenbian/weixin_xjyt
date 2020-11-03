@@ -2,7 +2,7 @@
 	<!-- 手机注册 -->
 	<view class="container_l">
 		<view :style="{height:statusBarHeight}"></view>
-		<view class="back" @click="back_page">返回</view>
+		<!-- <view class="back" @click="back_page">返回</view> -->
 		<view class="title" v-if="isPhone">手机注册</view>
 		<view class="title" v-else>邮箱注册</view>
 		<view class="int">

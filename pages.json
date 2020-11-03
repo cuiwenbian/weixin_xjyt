@@ -19,6 +19,12 @@
 			}
 		},
 		{
+			"path": "pages/regist/regist",
+			"style": {
+				"navigationStyle":"custom"
+			}
+		},
+		{
 			"path": "pages/register/register",
 			"style": {
 				"navigationStyle":"custom"
@@ -83,6 +89,84 @@
 					"path": "machine/machine",
 					"style": {
 						"navigationBarTitleText": "我的服务器"
+					}
+				},
+				{
+					"path": "suggest/suggest",
+					"style": {
+						"navigationBarTitleText": "建议反馈"
+					}
+				},
+				{
+					"path": "suggest-detail/suggest-detail",
+					"style": {
+						"navigationBarTitleText": "反馈记录"
+					}
+				},
+				{
+					"path": "helping/helping",
+					"style": {
+						"navigationStyle":"custom"
+					}
+				},
+				{
+					"path": "about_us/about_us",
+					"style": {
+						"navigationBarTitleText": "关于我们"
+					}
+				},
+				{
+					"path": "indentity_success/indentity_success",
+					"style": {
+						"navigationBarTitleText": "认证成功"
+					}
+				},
+				{
+					"path": "identity/identity",
+					"style": {
+						"navigationBarTitleText": "实名认证"
+					}
+				},
+				{
+					"path": "account_security/account_security",
+					"style": {
+						"navigationBarTitleText": "账户安全"
+					}
+				},
+				{
+					"path": "personal/personal",
+					"style": {
+						"navigationBarTitleText": "个人中心"
+					}
+				},
+				{
+					"path": "change_nickname/change_nickname",
+					"style": {
+						"navigationBarTitleText": "昵称"
+					}
+				},
+				{
+					"path": "explain/explain",
+					"style": {
+						"navigationBarTitleText": "结算说明"
+					}
+				},
+				{
+					"path": "withdrawal_record/withdrawal_record",
+					"style": {
+						"navigationBarTitleText": "提现记录"
+					}
+				},
+				{
+					"path": "withdrawal_success/withdrawal_success",
+					"style": {
+						"navigationBarTitleText": "提现成功"
+					}
+				},
+				{
+					"path": "transfer_success/transfer_success",
+					"style": {
+						"navigationBarTitleText": "转账成功"
 					}
 				}
 	

@@ -1,14 +1,20 @@
 <template>
 	<view class="logins">
-		<image class="login_bg" src="../../static/image/login_bg.png" mode="">
+		<view class="login_bg">
+			<image  src="../../static/image/login_bg.png" mode=""></image>
+		</view>
+		<view class="login_bg2">
+			<image  src="../../static/image/login_bg2.png" mode=""></image>
+		</view>
+		<!--  -->
 			<view class="popup">
 				<view class="con">
 					<view class="con_txt">
-						<text :class="['bt-tab', sel_tab === '1' ? 'bt-tab-active' : '']" @click="handleSelectTab('1')">密码登录</text>
-						<span>/</span>
-						<text :class="['bt-tab', sel_tab === '2' ? 'bt-tab-active' : '']" @click="handleSelectTab('2')">验证码登录</text>
+						<text :class="['bt-tab', sel_tab === '1' ? 'bt-tab-active' : '']" @click="handleSelectTab('1')">账号登录</text>
+						<span> </span>
+						<text :class="['bt-tab', sel_tab === '2' ? 'bt-tab-active' : '']" @click="handleSelectTab('2')">短信登录</text>
 					</view>
-					<view class="con_tip">请输入您的常用手机或邮箱</view>
+					<!-- <view class="con_tip">请输入您的常用手机或邮箱</view> -->
 					<view class="inp">
 						<view class="input"><input class="input_num" type="text" v-model="phone_email" placeholder="输入手机号或邮箱" /></view>
 						<view class="input" v-if="sel_tab=='1'">
@@ -26,21 +32,23 @@
 							</view>
 						</view>
 					</view>
+					<view class="forgetpwd" v-if="sel_tab=='1'">
+						<view @click="forget">忘记密码？</view>
+					</view>
 					<view v-if="sel_tab=='2'">
-						<view class="btn"   @click="code_login" v-if="allowLogin">登录</view>
-						<view class="btn_"   v-else>登录</view>
+						<view class="btn"   @click="code_login" v-if="allowLogin">立即登录</view>
+						<view class="btn_"   v-else>立即登录</view>
 					</view>
 					<view v-if="sel_tab=='1'">
-						<view class="btn"  @click="pwd_login" v-if="allowLogin_pwd">登录</view>
-						<view class="btn_"   v-else>登录</view>
+						<view class="btn"  @click="pwd_login" v-if="allowLogin_pwd">立即登录</view>
+						<view class="btn_"   v-else>立即登录</view>
 					</view>
 					<view class="register" v-if="sel_tab=='1'">
-						<view @click="register">注册</view>
-						<view @click="forget">忘记密码？</view>
+						<view>还没有账号？ <span @click="register" style="color:#3872FF;">去注册</span></view>
 					</view>
 				</view>
 			</view>
-		</image>
+		<!-- </image> -->
 	</view>
 </template>
 
@@ -360,7 +368,7 @@
 	};
 </script>
 
-<style>
+<style scoped>
 	page {
 		width: 100%;
 		height: 100%;
@@ -372,11 +380,22 @@
 	}
 
 	.login_bg {
-		width: 684rpx;
-		height: 385rpx;
+		width: 684px;
+		height: 385px;
 		display: block;
 		position: fixed;
-		top: 0;
+		left:-480rpx;
+		top: -220rpx;
+	}
+	.login_bg>image{
+		width:100%;
+		height:100%;
+	}
+	.login_bg2 {
+		display: block;
+		position: fixed;
+		left:-340rpx;
+		bottom: -280rpx;
 	}
 
 	.popup {
@@ -387,35 +406,43 @@
 	}
 
 	.con {
-		width: 92%;
+		width: 87%;
 		height: 67%;
-		background-color: #FFFFFF;
-		border-radius: 20px;
 		margin: 28% auto;
-		padding: 95rpx 48rpx;
+		padding: 95rpx 0rpx;
+		box-sizing: border-box;
 	}
 
 	.con_txt {
-		color: #999999;
-		font-size: 40rpx;
-		/* letter-spacing: 5rpx; */
+		margin-bottom: 20rpx;
 	}
 
 	.con_txt>span {
-		color: #2E2E2E;
+		color: #BFBFBF;
 		display: inline-block;
-		margin: 0 10rpx;
+		margin: 0 20rpx;
 	}
 
 	.bt-tab {
-		color: #999999;
-		font-size: 40rpx;
+		color: #BFBFBF;
+		font-size: 28rpx;
 	}
 
 	.bt-tab-active {
-		color: #333333;
+        color: #040404;
 		font-size: 48rpx;
-		font-weight: bold;
+		font-weight: 500;
+		position: relative;
+	}
+	.bt-tab-active:after{
+	   content:"";
+	   width: 11rpx;
+	   height: 11rpx;
+	   background: #0074FF;
+	   border-radius: 50%;
+	   position: absolute;
+	   bottom:-15rpx;
+	   left: 46%;
 	}
 
 	.con_tip {
@@ -426,14 +453,13 @@
 
 	.inp {
 		width: 100%;
-		height: 300rpx;
-		/* background-color: #007AFF; */
+		height: 306rpx;
 	}
 
 	.input {
 		width: 100%;
-		height: 150rpx;
-		padding-top: 50rpx;
+		height: 153rpx;
+		padding-top: 30rpx;
 		box-sizing: border-box;
 		border-bottom: 1rpx solid #DDDDDD;
 	}
@@ -496,33 +522,49 @@
 		border: none;
 	}
 	.btn {
-		width: 556rpx;
-		height: 80rpx;
-		background: rgba(25, 119, 255, 1);
-		border-radius: 40rpx;
+		width: 87%;
+		height: 93rpx;
+		font-size: 37rpx;
+		line-height: 93rpx;
+		font-weight: 600;
+		background: #3872FF;
+		box-shadow: 15rpx 26rpx 90rpx 0rpx rgba(56, 114, 255, 0.41);
+		border-radius: 47rpx;
 		text-align: center;
 		color: #FFFFFF;
-		font-size: 34rpx;
-		line-height: 80rpx;
-		margin: 99rpx auto 80rpx auto;
+		margin: 99rpx auto 71rpx auto;
 	}
 	.btn_ {
-		width: 556rpx;
-		height: 80rpx;
+		width: 87%;
+		height: 93rpx;
+		font-size: 37rpx;
+		line-height: 93rpx;
+		font-weight: 600;
 		background: rgba(25, 119, 255, 0.3);
-		border-radius: 40rpx;
+		border-radius: 47rpx;
 		text-align: center;
 		color: #FFFFFF;
-		font-size: 34rpx;
-		line-height: 80rpx;
-		margin: 99rpx auto 80rpx auto;
+		margin: 99rpx auto 71rpx auto;
 	}
-
+    .forgetpwd{
+		width: 100%;
+		height: 100rpx;
+		margin: 0 auto;
+		line-height: 100rpx;
+		font-size: 28rpx;
+		font-weight: 500;
+		color: #3872FF;
+		display: flex;
+		justify-content:flex-end;
+	}
 	.register {
-		width: 84%;
+		width: 87%;
 		height: 50rpx;
 		margin: 0 auto;
 		display: flex;
-		justify-content: space-between;
+		justify-content: center;
+		font-size: 28rpx;
+		font-weight: 500;
+		color: #666666;
 	}
 </style>

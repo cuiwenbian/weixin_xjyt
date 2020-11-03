@@ -4,7 +4,6 @@
 	padding: 0 64rpx;
 	box-sizing: border-box;
 }
-
 .back {
 	color: #00bfbf;
 	font-size: 30rpx;
@@ -12,11 +11,21 @@
 }
 
 .title {
-	color: #333;
-	margin-top: 110rpx;
-	font-size: 56rpx;
-	font-weight: 800;
-	/* line-height: 60px; */
+	margin-top: 270rpx;
+	font-size: 48rpx;
+	font-weight: 500;
+	color: #040404;
+	position: relative;
+}
+.title:after{
+	content:"";
+	width: 11rpx;
+	height: 11rpx;
+	background: #0074FF;
+	border-radius: 50%;
+	position: absolute;
+	bottom:-15rpx;
+	left: 46%;
 }
 
 .int {
