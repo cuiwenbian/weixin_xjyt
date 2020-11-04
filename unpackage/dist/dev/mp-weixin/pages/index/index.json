@@ -1,7 +1,7 @@
 {
   "navigationStyle": "custom",
   "usingComponents": {
-    "hj-dragabledrawer": "/components/hj-dragabledrawer/hj-dragabledrawer",
+    "uni-drawer": "/components/uni-drawer/uni-drawer",
     "carousel": "/components/vear-carousel/vear-carousel"
   }
 }

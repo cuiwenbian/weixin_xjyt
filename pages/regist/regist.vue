@@ -94,7 +94,7 @@ export default {
 		},
 		register() {
 			uni.navigateTo({
-				url: '../register/register'
+				url: '../login/login'
 			});
 		},
 		forget() {

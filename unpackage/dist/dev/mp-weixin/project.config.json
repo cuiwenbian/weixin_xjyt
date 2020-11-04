@@ -29,15 +29,17 @@
       "outputPath": ""
     },
     "useIsolateContext": true,
-    "useCompilerModule": true,
+    "useCompilerModule": false,
     "userConfirmedUseCompilerModuleSwitch": false,
     "packNpmManually": false,
     "packNpmRelationList": []
   },
   "compileType": "miniprogram",
   "libVersion": "",
-  "appid": "wxc62459b2d6b1d7f6",
+  "appid": "touristappid",
   "projectname": "xjyt_wx",
+  "simulatorType": "wechat",
+  "simulatorPluginLibVersion": {},
   "condition": {
     "search": {
       "current": -1,

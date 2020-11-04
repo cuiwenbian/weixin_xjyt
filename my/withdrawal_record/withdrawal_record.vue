@@ -3,7 +3,7 @@
 	<view>
 		<view v-if="hasRecord">
 			<view class="record_list">
-				<view class="record_icon"><image src="../../static/image/checked.png" mode=""></image></view>
+				<view class="record_icon"><image src="../../static/image/filecoin-logo.png" mode=""></image></view>
 				<view class="record_info">
 					<view class="r">- 100.05 FIL</view>
 					<view class="s" :style="{'color':n==0?'#F9B81A':n==2?'#36BC36':'#ED481C'}">审核通过，区块链确认中</view>

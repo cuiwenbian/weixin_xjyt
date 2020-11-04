@@ -96,7 +96,7 @@
 			},
 			register() {
 				uni.navigateTo({
-					url: "../register/register"
+					url: "../regist/regist"
 				})
 			},
 			forget() {

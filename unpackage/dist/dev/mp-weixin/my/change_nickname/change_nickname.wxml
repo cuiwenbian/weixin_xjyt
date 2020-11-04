@@ -1,0 +1,1 @@
+<view class="maincontent"><view class="s-line"></view><view data-event-opts="{{[['tap',[['personal',['$event']]]]]}}" class="l" bindtap="__e"><view class="infoo"><view><input type="text" value="{{nickname}}"/></view><view class="avator"><image class="pic" src="../../static/image/clear_txt.png" mode></image></view></view></view></view>

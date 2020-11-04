@@ -1,7 +1,7 @@
 <template>
 	<view>
-		<wTitleBar title="星际云通" textColor="#fff" @open="open"></wTitleBar>
-		<hj-dragabledrawer :options="options" ref="dragBox" @open="afterOpen" @close="afterClose"></hj-dragabledrawer>
+		<uni-drawer ref="drawer"></uni-drawer>
+		<wTitleBar title="星际云通" textColor="#fff" @open="hendleclick"></wTitleBar>
 		<carousel :img-list="imgList" url-key="url" @selected="selectedBanner" />
 		<view class="content">
 			<view class="ban_btns">
@@ -60,8 +60,8 @@
 
 <script>
 import carousel from '@/components/vear-carousel/vear-carousel';
-import {debounce} from '@/common/utils.js';
-import hjDragabledrawer from '@/components/hj-dragabledrawer/hj-dragabledrawer.vue';
+import { debounce } from '@/common/utils.js';
+import uniDrawer from '@/components/uni-drawer/uni-drawer.vue';
 let dragBox;
 export default {
 	data() {
@@ -98,7 +98,7 @@ export default {
 	},
 	components: {
 		carousel,
-		hjDragabledrawer
+		uniDrawer
 	},
 	onLoad() {
 		this.$Api.getNews().then(
@@ -113,8 +113,8 @@ export default {
 		selectedBanner(item, index) {
 			console.log('🥒', item, index);
 		},
-		open() {
-			dragBox.open();
+		hendleclick() {
+			this.$refs.drawer.open();
 		},
 		hello() {
 			uni.showToast({
@@ -123,7 +123,7 @@ export default {
 			});
 		},
 		close() {
-			dragBox.close();
+			this.$refs.drawer.close();
 		},
 		toggle() {
 			this.options.rightMode = !this.options.rightMode;
@@ -155,7 +155,7 @@ export default {
 		mypower: function() {
 			this.linkToTransfer();
 		},
-		mymachine:function(){
+		mymachine: function() {
 			this.linkToTransfer1();
 		},
 		linkToTransfer1: debounce(
@@ -166,7 +166,7 @@ export default {
 			},
 			1000,
 			true
-		),
+		)
 	}
 };
 </script>

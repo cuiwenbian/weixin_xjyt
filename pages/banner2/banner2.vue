@@ -7,7 +7,13 @@
 			<view class="art_tit">
 				{{title}}
 			</view>
-			<view class="art_time">{{add}}</view>
+			<view class="art_time">
+				<view class="avator_img"><image src="../../static/w-titleBar/avators.png" mode=""></image></view>
+			    <view class="descc">
+					<view class="gg">星际云通官方</view>
+					<view class="tt">{{add}}</view>
+				</view>
+			</view>
 			<view class="conten">
 				<rich-text :nodes="aa"></rich-text>
 			</view>
@@ -84,13 +90,41 @@
 
 	.art_time {
 		width: 100%;
-		height: 82rpx;
-		line-height: 82rpx;
+		height: 112rpx;
+		padding-bottom: 30rpx;
+		box-sizing: border-box;
 		font-size: 24rpx;
 		color: #999999;
-		text-align: right;
 		border-bottom: 1rpx solid #EBEBEB;
+		display: flex;
+		align-items: center;
 	}
+	.avator_img{
+		width: 65rpx;
+		height:65rpx;
+	}
+	.avator_img>image{
+		width:100%;
+		height:100%;
+	}
+	.descc{
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-around;
+		margin-left: 20rpx;
+	}
+	.gg{
+		font-size: 26rpx;
+		font-weight: 800;
+		color: #333333;
+	}
+	.tt{
+		font-size: 18rpx;
+		font-weight: 400;
+		color: #CECECE;
+	}
+	
 	.conten{
 		padding: 30rpx;
 		box-sizing: border-box;

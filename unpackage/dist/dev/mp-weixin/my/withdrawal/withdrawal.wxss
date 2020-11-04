@@ -1,0 +1,115 @@
+
+page {
+	background: #f6f6f6;
+}
+.withdrawal {
+}
+.line_ {
+	width: 100%;
+	height: 20rpx;
+}
+.adr_line {
+	width: 100%;
+	height: 113rpx;
+	background-color: #ffffff;
+	padding: 0 42rpx;
+	box-sizing: border-box;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+	-webkit-box-pack: justify;
+	-webkit-justify-content: space-between;
+	        justify-content: space-between;
+}
+.tsd {
+	font-size: 30rpx;
+	font-weight: 500;
+	color: #24262f;
+}
+.tsd_imgs {
+	width: 20%;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-pack: justify;
+	-webkit-justify-content: space-between;
+	        justify-content: space-between;
+}
+.amount_line {
+	width: 100%;
+	height: 349rpx;
+	background-color: #ffffff;
+	padding: 0 42rpx;
+	box-sizing: border-box;
+}
+.tit {
+	font-size: 30rpx;
+	font-weight: 500;
+	color: #24262f;
+	padding-top: 42rpx;
+	padding-bottom: 63rpx;
+	box-sizing: border-box;
+}
+.int {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-pack: justify;
+	-webkit-justify-content: space-between;
+	        justify-content: space-between;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+	border-bottom: 1rpx solid #f7f7f7;
+}
+.int > input {
+	width: 80%;
+	font-size: 84rpx;
+	font-weight: 500;
+	color: #24262f;
+}
+.int > view {
+	font-size: 30rpx;
+	font-weight: 500;
+	color: #0090ff;
+}
+.avaible {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-pack: justify;
+	-webkit-justify-content: space-between;
+	        justify-content: space-between;
+}
+.avaible > view {
+	font-size: 24rpx;
+	font-weight: 500;
+	color: #24262f;
+	opacity: 0.53;
+	margin-top: 22rpx;
+}
+.tips{
+	margin-top: 97rpx;
+	padding: 0 42rpx;
+	box-sizing: border-box;
+	text-align: center;
+}
+.tips_tit{
+	font-size: 28rpx;
+	font-weight: 600;
+	color: #222222;
+}
+.tips_con{
+	font-size: 24rpx;
+	font-weight: 400;
+	color: #888888;
+	line-height: 41rpx;
+	margin-top: 25rpx;
+}
+.tips_con>._span{
+	color:#0090FF;
+}
+

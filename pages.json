@@ -19,7 +19,7 @@
 			}
 		},
 		{
-			"path": "pages/regist/regist",
+			"path": "pages/my_income/my_income",
 			"style": {
 				"navigationStyle":"custom"
 			}
@@ -33,7 +33,7 @@
 		{
 			"path": "pages/moreNews/moreNews",
 			"style": {
-				"navigationBarTitleText": "资讯列表"
+				"navigationBarTitleText": "热门资讯"
 			}
 		},
 		{
@@ -152,6 +152,12 @@
 					}
 				},
 				{
+					"path": "withdrawal/withdrawal",
+					"style": {
+						"navigationBarTitleText": "提现"
+					}
+				},
+				{
 					"path": "withdrawal_record/withdrawal_record",
 					"style": {
 						"navigationBarTitleText": "提现记录"
@@ -167,6 +173,18 @@
 					"path": "transfer_success/transfer_success",
 					"style": {
 						"navigationBarTitleText": "转账成功"
+					}
+				},
+				{
+					"path": "address/address",
+					"style": {
+						"navigationBarTitleText": "地址薄"
+					}
+				},
+				{
+					"path": "add_address/add_address",
+					"style": {
+						"navigationBarTitleText": "地址薄"
 					}
 				}
 	
@@ -188,7 +206,7 @@
 			"selectedIconPath": "static/image/tab_icon1.png",
 			"text": "组件"
 		}, {
-			"pagePath": "pages/profit/profit",
+			"pagePath": "pages/my_income/my_income",
 			"iconPath": "static/image/tab_icon2.png",
 			"selectedIconPath": "static/image/tab_icon1.png",
 			"text": "接口"

@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "热门资讯",
+  "usingComponents": {
+    "load-refresh": "/components/load-refresh/load-refresh"
+  }
+}

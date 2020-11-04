@@ -1,4 +1,5 @@
 <template>
+	<!-- 实名认证成功 -->
 	<view>
 		<view class="succ_img">
 			<image src="../../static/image/successful.png" mode=""></image>

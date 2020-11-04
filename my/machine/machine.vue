@@ -102,6 +102,7 @@
 		font-weight: 600;
 		color: #111111;
 		line-height: 50rpx;
+		margin-top: 10rpx;
 		font-family: 'myface_bold';
 	}
 

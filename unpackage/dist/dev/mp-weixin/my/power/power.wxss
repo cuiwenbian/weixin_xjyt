@@ -1,0 +1,127 @@
+
+.validate{
+	width: 100%;
+	height: 89rpx;
+	background-color: #E74B27;
+	line-height: 89rpx;
+	font-size: 30rpx;
+	font-weight: 300;
+	color: #FFFFFF;
+	padding-left: 42rpx;
+	box-sizing: border-box;
+}
+.power_ban {
+	width: 100%;
+	height: 273rpx;
+	position: relative;
+}
+.power_ban>image{
+	width: 100%;
+	height: 100%;
+}
+.pop_txt {
+	width: 100%;
+	height:273rpx;
+	padding:75rpx 0 70rpx 43rpx;
+	box-sizing: border-box;
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-pack: justify;
+	-webkit-justify-content: space-between;
+	        justify-content: space-between;
+	/* 水平均匀分布 */
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: column;
+	        flex-direction: column;
+}
+.txt {
+	font-size: 30rpx;
+	font-weight: 300;
+	color: #fff;
+}
+.power_nums {
+	font-size: 60rpx;
+	font-weight: 500;
+	color: #FFFFFF;
+}
+.power_list{
+	padding: 50rpx 42rpx;
+}
+.power_eve{
+	width: 100%;
+	height: 172rpx;
+	background: #FFFFFF;
+	box-shadow: 6rpx 4rpx 16rpx 0rpx rgba(19, 63, 230, 0.11);
+	border-radius: 10rpx;
+	margin-bottom: 36rpx;
+	padding:28rpx 27rpx;
+	box-sizing: border-box;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	position: relative;
+}
+.pos_bgimg{
+	width: 252rpx;
+	height: 85rpx;
+	position: absolute;
+	right: -42rpx;
+	bottom: 0;
+}
+.eve_left{
+	width: 70%;
+	height:100%;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-pack: justify;
+	-webkit-justify-content: space-between;
+	        justify-content: space-between;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: column;
+	        flex-direction: column;
+}
+.e1{
+	font-size: 30rpx;
+	font-weight: 600;
+	color: #2F363D;
+}
+.e2{
+	font-size: 24rpx;
+	font-weight: 400;
+	color: #2F363D;
+	opacity: 0.6;
+}
+.eve_right{
+	width: 30%;
+	height: 100%;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-pack: justify;
+	-webkit-justify-content: space-between;
+	        justify-content: space-between;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: column;
+	        flex-direction: column;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+}
+.circle_process{
+   widht:64rpx;
+   height:64rpx;
+}
+.e3{
+	font-size: 60rpx;
+	font-weight: 500;
+	color: #2F363D;
+}
+

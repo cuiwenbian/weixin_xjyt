@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<view style="width: 100%;z-index: 999999;" :style="{background:bgColor,position:fixed=='none'?'none':'fixed'}">
+		<view style="width: 100%;z-index: 9999;" :style="{background:bgColor,position:fixed=='none'?'none':'fixed'}">
 			<view class="status_bar" :style="{height:h+'px'}">
 				<!-- 这里是状态栏 -->
 			</view>
@@ -46,7 +46,7 @@
 			//标题名称  默认首页
 			title: {
 				type: String,
-				default: "首页",
+				default: "我的收益",
 			},
 			//文字颜色 默认黑灰色
 			textColor: {

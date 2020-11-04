@@ -1,13 +1,40 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/profit/profit"
+    "pages/profit/profit",
+    "pages/login/login",
+    "pages/my_income/my_income",
+    "pages/register/register",
+    "pages/moreNews/moreNews",
+    "pages/web1/web1",
+    "pages/web2/web2",
+    "pages/banner/banner",
+    "pages/banner2/banner2",
+    "pages/banner3/banner3",
+    "pages/announcement/announcement"
   ],
   "subPackages": [
     {
       "root": "my",
       "pages": [
-        "power/power"
+        "power/power",
+        "machine/machine",
+        "suggest/suggest",
+        "suggest-detail/suggest-detail",
+        "helping/helping",
+        "about_us/about_us",
+        "indentity_success/indentity_success",
+        "identity/identity",
+        "account_security/account_security",
+        "personal/personal",
+        "change_nickname/change_nickname",
+        "explain/explain",
+        "withdrawal/withdrawal",
+        "withdrawal_record/withdrawal_record",
+        "withdrawal_success/withdrawal_success",
+        "transfer_success/transfer_success",
+        "address/address",
+        "add_address/add_address"
       ]
     }
   ],
@@ -34,7 +61,7 @@
         "text": "组件"
       },
       {
-        "pagePath": "pages/profit/profit",
+        "pagePath": "pages/my_income/my_income",
         "iconPath": "static/image/tab_icon2.png",
         "selectedIconPath": "static/image/tab_icon1.png",
         "text": "接口"
@@ -43,5 +70,6 @@
   },
   "usingComponents": {
     "w-title-bar": "/components/w-titleBar/w-titleBar"
-  }
+  },
+  "sitemapLocation": "sitemap11.json"
 }

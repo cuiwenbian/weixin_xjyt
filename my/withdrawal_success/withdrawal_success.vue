@@ -27,7 +27,7 @@
 		margin-top:52rpx;
 		font-size: 30rpx;
 		font-weight: 600;
-		color: #222222;
+		/* color: #222222; */
 		opacity: 0.9;
 	}
 	.konw{
