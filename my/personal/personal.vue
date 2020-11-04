@@ -18,7 +18,17 @@
 			</view>
 		</view>
 		<view class="s-line"></view>
-		<view class="logout">退出登录</view>
+		<view class="logout"  @click="logout">退出登录</view>
+		<view class="shade" v-if="shade" @touchmove.stop.prevent="moveHandle">
+			<view class="pop">
+				<view class="tips">提示</view>
+				<view class="pop-title">退出登录？</view>
+				<view class="pops">
+					<view class="pop-btn quxiao" @click="cancell">取消</view>
+					<view class="pop-btn yess" @click="sure">退出</view>
+				</view>
+			</view>
+		</view>
 	</view>
 </template>
 
@@ -26,11 +36,35 @@
 export default {
 	data() {
 		return {
-			nickname: '232'
+			nickname: '232',
+			shade: false,
 		};
+	},
+	onHide() {
+		this.shade = false;
 	},
 	onLoad(option) {
 		// this.nickname = option.nickname;
+	},
+	methods:{
+		logout: function() {
+			this.shade = true;
+		},
+		moveHandle: function(e) {
+			e.preventDefault();
+			e.stopPropagation();
+		},
+		cancell: function() {
+			this.shade = false;
+		},
+		sure: function() {
+			uni.removeStorageSync('phone');
+			uni.removeStorageSync('token');
+			uni.removeStorageSync('nowtime');
+			uni.reLaunch({
+				url: '../../pages/login/login'
+			});
+		},
 	}
 };
 </script>
@@ -98,5 +132,61 @@ page {
 	font-weight: 500;
 	color: #3072F7;
 }
+.shade {
+		width: 100%;
+		height: 100%;
+		background: rgba(0, 0, 0, 0.4);
+		position: fixed;
+		left: 0;
+		top: 0;
+		z-index: 99;
+	}
 
+	.pop {
+		width: 636rpx;
+		height: 368rpx;
+		margin: 450rpx auto;
+		padding: 47rpx 40rpx 48rpx;
+		box-sizing: border-box;
+		background: #fff;
+		border-radius: 5rpx;
+	}
+
+	.tips {
+		text-align: center;
+		font-size: 30rpx;
+		color: #333333;
+		font-weight: bold;
+	}
+
+	.pop-title {
+		height: 160rpx;
+		line-height: 160rpx;
+		text-align: center;
+		font-size: 28rpx;
+		color: #666666;
+	}
+
+	.pops {
+		height: 100rpx;
+		width: 100%;
+		display: flex;
+		justify-content: space-between;
+	}
+
+	.pop-btn {
+		width: 260rpx;
+		height: 72rpx;
+		border-radius: 5rpx;
+		line-height: 72rpx;
+		font-size: 26rpx;
+		color: #666666;
+		background: #cacaca;
+		text-align: center;
+	}
+
+	.yess {
+		background: #41bec9;
+		color: #ffffff;
+	}
 </style>

@@ -134,7 +134,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
 
 
@@ -215,7 +215,8 @@ var _utils = __webpack_require__(/*! @/common/utils.js */ 19); //
 //
 //
 //
-var uniDrawer = function uniDrawer() {__webpack_require__.e(/*! require.ensure | components/uni-drawer/uni-drawer */ "components/uni-drawer/uni-drawer").then((function () {return resolve(__webpack_require__(/*! @/components/uni-drawer/uni-drawer.vue */ 267));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default = { data: function data() {return { sel_tab: '1' };}, components: { uniDrawer: uniDrawer }, methods: { hendleclick: function hendleclick() {this.$refs.drawer.open();}, handleSelectTab: function handleSelectTab(tab) {this.sel_tab = tab;} } };exports.default = _default;
+var uniDrawer = function uniDrawer() {__webpack_require__.e(/*! require.ensure | components/uni-drawer/uni-drawer */ "components/uni-drawer/uni-drawer").then((function () {return resolve(__webpack_require__(/*! @/components/uni-drawer/uni-drawer.vue */ 267));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default = { data: function data() {return { sel_tab: '1' };}, components: { uniDrawer: uniDrawer }, methods: { hendleclick: function hendleclick() {this.$refs.drawer.open();}, handleSelectTab: function handleSelectTab(tab) {this.sel_tab = tab;}, explain: function explain() {uni.navigateTo({ url: '../../my/explain/explain' });} } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 

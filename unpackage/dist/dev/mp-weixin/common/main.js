@@ -16,7 +16,8 @@ var _api = _interopRequireDefault(__webpack_require__(/*! request/api.js */ 11))
 _vue.default.config.productionTip = false;
 
 _vue.default.prototype.$Api = _api.default; //挂载全局
-
+_vue.default.prototype.url = 'https://api.ipcn.xyz/api/v1/';
+_vue.default.prototype.urla = 'https://api.ipcn.xyz/';
 _App.default.mpType = 'app';
 
 var app = new _vue.default(_objectSpread({},

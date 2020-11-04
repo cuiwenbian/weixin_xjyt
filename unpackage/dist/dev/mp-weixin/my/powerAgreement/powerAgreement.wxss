@@ -1,0 +1,59 @@
+
+.downloadSuccess {
+	width: 90%;
+	height: 120rpx;
+	padding: 10rpx;
+	box-sizing: border-box;
+	line-height: 50rpx;
+	background-color: rgba(0, 0, 0, 0.8);
+	border-radius: 20rpx;
+	position: fixed;
+	top: 450rpx;
+	left: calc(10%/2);
+	word-break: break-all;
+	word-wrap: break-word;
+	color: #fff;
+}
+.dde {
+	height: 500rpx;
+}
+.fix {
+	width: 100%;
+	height: 98rpx;
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	background: rgba(0, 0, 0, 0.4);
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-pack: justify;
+	-webkit-justify-content: space-between;
+	        justify-content: space-between;
+}
+.down {
+	width: 130rpx;
+	height: 60rpx;
+	font-size: 26rpx;
+	line-height: 60rpx;
+	margin-top: 19rpx;
+	color: #fff;
+	border-radius: 50rpx;
+	background-image: -webkit-linear-gradient(left, #01c774, #01dda9);
+	background-image: linear-gradient(to right, #01c774, #01dda9);
+}
+.dowwn {
+	width: 160rpx;
+	height: 60rpx;
+	font-size: 26rpx;
+	line-height: 60rpx;
+	margin-top: 19rpx;
+	color: #fff;
+	border-radius: 50rpx;
+	background-image: -webkit-linear-gradient(left, #01c774, #01dda9);
+	background-image: linear-gradient(to right, #01c774, #01dda9);
+}
+.agreemen {
+	font-size: 20rpx;
+}
+

@@ -186,6 +186,66 @@
 					"style": {
 						"navigationBarTitleText": "地址薄"
 					}
+				},
+				{
+					"path": "email/email",
+					"style": {
+						"navigationBarTitleText": "绑定邮箱"
+					}
+				},
+				{
+					"path": "unbindemail/unbindemail",
+					"style": {
+						"navigationBarTitleText": "解绑邮箱"
+					}
+				},
+				{
+					"path": "login-password/login-password",
+					"style": {
+						"navigationBarTitleText": "修改登录密码"
+					}
+				},
+				{
+					"path": "change-pass/change-pass",
+					"style": {
+						"navigationBarTitleText": "修改登录密码"
+					}
+				},
+				{
+					"path": "change-loginPassword/change-loginPassword",
+					"style": {
+						"navigationBarTitleText": "设置登录密码"
+					}
+				},
+				{
+					"path": "change-password/change-password",
+					"style": {
+						"navigationBarTitleText": "修改交易密码"
+					}
+				},
+				{
+					"path": "trade-password/trade-password",
+					"style": {
+						"navigationBarTitleText": "设置交易密码"
+					}
+				},
+				{
+					"path": "change-otherPassword/change_otherPassword",
+					"style": {
+						"navigationBarTitleText": "找回密码"
+					}
+				},
+				{
+					"path": "agreement/agreement",
+					"style": {
+						"navigationBarTitleText": "用户服务协议"
+					}
+				},
+				{
+					"path": "powerAgreement/powerAgreement",
+					"style": {
+						"navigationBarTitleText": "用户存力协议"
+					}
 				}
 	
 			]

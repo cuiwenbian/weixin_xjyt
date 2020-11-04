@@ -232,7 +232,6 @@ var check = __webpack_require__(/*! ../../common/utils.js */ 19);var _default = 
       this.shade = false;
     },
     sure: function sure() {
-      // uni.getStorageSync('token') == '';
       uni.removeStorageSync('phone');
       uni.removeStorageSync('token');
       uni.removeStorageSync('nowtime');
@@ -240,161 +239,29 @@ var check = __webpack_require__(/*! ../../common/utils.js */ 19);var _default = 
         url: '../login/login' });
 
     },
-    // 跳转路劲
+    aggrement_power: function aggrement_power() {
+      this.linkToTransfer();
+    },
     linkToTransfer: (0, _utils.debounce)(
     function () {
       uni.navigateTo({
-        url: '../../my/personal/personal?phone=' + this.phone });
+        url: '../powerAgreement/powerAgreement' });
 
     },
-    500,
+    1000,
     true),
 
-    personal: function personal() {
-      this.linkToTransfer();
+    aggrement_seivice: function aggrement_seivice() {
+      this.linkToTransfer1();
     },
     linkToTransfer1: (0, _utils.debounce)(
     function () {
-      uni.request({
-        url: this.url + 'linkemails/',
-        method: 'GET',
-        header: {
-          Authorization: 'JWT' + ' ' + uni.getStorageSync('token') },
-
-        success: function success(res) {
-          if (res.statusCode == 200 || res.statusCode == 201) {
-            uni.navigateTo({
-              url: '../../my/email/email' });
-
-          }
-          if (res.statusCode == 400) {
-            uni.navigateTo({
-              url: '../../my/unbindemail/unbindemail' });
-
-          }
-        } });
+      uni.navigateTo({
+        url: '../agreement/agreement' });
 
     },
     500,
-    true),
-
-    mailaddress: function mailaddress() {
-      this.linkToTransfer1();
-    },
-    linkToTransfer2: (0, _utils.debounce)(
-    function () {
-      //console.log("身份认证")
-      uni.request({
-        url: this.url + 'realnames/',
-        method: 'GET',
-        header: {
-          Authorization: 'JWT' + ' ' + uni.getStorageSync('token') },
-
-        sslVerify: false,
-        success: function success(res) {
-          if (res.statusCode == 400) {
-            uni.showToast({
-              title: '已实名认证',
-              icon: 'none',
-              duration: 2000 });
-
-            return false;
-          }
-          if (res.statusCode == 406) {
-            uni.showToast({
-              title: '身份认证审核中，请等待',
-              icon: 'none',
-              duration: 2000 });
-
-            return false;
-          }
-          if (res.statusCode == 200) {
-            uni.navigateTo({
-              url: '../../my/identity/identity' });
-
-          }
-        },
-        fail: function fail(res) {
-        } });
-
-    },
-    500,
-    true),
-
-    authentication: function authentication() {
-      this.linkToTransfer2();
-    },
-    linkToTransfer3: (0, _utils.debounce)(
-    function () {
-      uni.request({
-        url: this.url + 'updataloginpwd/',
-        method: 'GET',
-        header: {
-          Authorization: 'JWT' + ' ' + uni.getStorageSync('token') },
-
-        success: function success(res) {
-          if (res.statusCode == 400) {
-            uni.navigateTo({
-              url: '../../my/change-loginPassword/change-loginPassword' });
-
-          }
-          if (res.statusCode == 200) {
-            uni.navigateTo({
-              url: '../../my/change-pass/change-pass' });
-
-          }
-        } });
-
-    },
-    500,
-    true),
-
-    loginpassword: function loginpassword() {
-      this.linkToTransfer3();
-    },
-    linkToTransfer4: (0, _utils.debounce)(
-    function () {
-      var that = this;
-      uni.request({
-        url: this.url + 'setmoneys/',
-        method: 'GET',
-        header: {
-          Authorization: 'JWT' + ' ' + uni.getStorageSync('token') },
-
-        success: function success(res) {
-          if (res.statusCode == 302) {
-            uni.showToast({
-              title: '用户未绑定邮箱',
-              icon: 'none',
-              duration: 2000 });
-
-            return false;
-          }
-          if (res.statusCode == 400) {
-            uni.navigateTo({
-              url: '../../my/change-password/change-password' });
-
-          }
-          if (res.statusCode == 200) {
-            uni.navigateTo({
-              url: '../../my/trade-password/trade-password' });
-
-          }
-        } });
-
-    },
-    500,
-    true),
-
-    radepassword: function radepassword() {
-      this.linkToTransfer4();
-    },
-    // 返回
-    onBack: function onBack() {
-      uni.navigateBack({
-        delta: 1 });
-
-    } } };exports.default = _default;
+    true) } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

@@ -13,7 +13,7 @@
 			</view>
 			<view class="annotation">
 				注释：收益规则请查看
-				<span style="color:#1E8BE7;">结算说明</span>
+				<span style="color:#1E8BE7;" @click="explain">结算说明</span>
 				，最终解释权归星际云通所有！
 			</view>
 			<view class="con_txt">
@@ -56,6 +56,11 @@ export default {
 		},
 		handleSelectTab(tab) {
 			this.sel_tab = tab;
+		},
+		explain(){
+			uni.navigateTo({
+				url:'../../my/explain/explain'
+			})
 		}
 	}
 };

@@ -34,7 +34,17 @@
         "withdrawal_success/withdrawal_success",
         "transfer_success/transfer_success",
         "address/address",
-        "add_address/add_address"
+        "add_address/add_address",
+        "email/email",
+        "unbindemail/unbindemail",
+        "login-password/login-password",
+        "change-pass/change-pass",
+        "change-loginPassword/change-loginPassword",
+        "change-password/change-password",
+        "trade-password/trade-password",
+        "change-otherPassword/change_otherPassword",
+        "agreement/agreement",
+        "powerAgreement/powerAgreement"
       ]
     }
   ],
@@ -70,6 +80,5 @@
   },
   "usingComponents": {
     "w-title-bar": "/components/w-titleBar/w-titleBar"
-  },
-  "sitemapLocation": "sitemap11.json"
+  }
 }

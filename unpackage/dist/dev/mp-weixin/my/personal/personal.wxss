@@ -67,5 +67,59 @@ page {
 	font-weight: 500;
 	color: #3072F7;
 }
-
+.shade {
+		width: 100%;
+		height: 100%;
+		background: rgba(0, 0, 0, 0.4);
+		position: fixed;
+		left: 0;
+		top: 0;
+		z-index: 99;
+}
+.pop {
+		width: 636rpx;
+		height: 368rpx;
+		margin: 450rpx auto;
+		padding: 47rpx 40rpx 48rpx;
+		box-sizing: border-box;
+		background: #fff;
+		border-radius: 5rpx;
+}
+.tips {
+		text-align: center;
+		font-size: 30rpx;
+		color: #333333;
+		font-weight: bold;
+}
+.pop-title {
+		height: 160rpx;
+		line-height: 160rpx;
+		text-align: center;
+		font-size: 28rpx;
+		color: #666666;
+}
+.pops {
+		height: 100rpx;
+		width: 100%;
+		display: -webkit-box;
+		display: -webkit-flex;
+		display: flex;
+		-webkit-box-pack: justify;
+		-webkit-justify-content: space-between;
+		        justify-content: space-between;
+}
+.pop-btn {
+		width: 260rpx;
+		height: 72rpx;
+		border-radius: 5rpx;
+		line-height: 72rpx;
+		font-size: 26rpx;
+		color: #666666;
+		background: #cacaca;
+		text-align: center;
+}
+.yess {
+		background: #41bec9;
+		color: #ffffff;
+}
 

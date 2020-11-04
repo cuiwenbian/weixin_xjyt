@@ -191,18 +191,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 var _utils = __webpack_require__(/*! @/common/utils.js */ 19);var carousel = function carousel() {__webpack_require__.e(/*! require.ensure | components/vear-carousel/vear-carousel */ "components/vear-carousel/vear-carousel").then((function () {return resolve(__webpack_require__(/*! @/components/vear-carousel/vear-carousel */ 274));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var uniDrawer = function uniDrawer() {__webpack_require__.e(/*! require.ensure | components/uni-drawer/uni-drawer */ "components/uni-drawer/uni-drawer").then((function () {return resolve(__webpack_require__(/*! @/components/uni-drawer/uni-drawer.vue */ 267));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
 
 var dragBox;var _default =
@@ -216,24 +204,8 @@ var dragBox;var _default =
         autoClose: true,
         pulldown: true },
 
-      imgList: [
-      {
-        url: 'https://img9.51tietu.net/pic/2019-091200/vgkpidei2tjvgkpidei2tj.jpg',
-        id: 1 },
-
-      {
-        url: 'https://img9.51tietu.net/pic/2019-091200/euzekmi5m23euzekmi5m23.jpg',
-        id: 2 },
-
-      {
-        url: 'https://img9.51tietu.net/pic/2019-091200/143tt0ta4sr143tt0ta4sr.jpg',
-        id: 3 },
-
-      {
-        url: 'https://img9.51tietu.net/pic/2019-091200/ff1vqwm3q33ff1vqwm3q33.jpg',
-        id: 4 }] };
-
-
+      imgList: [],
+      title: '' };
 
   },
   onReady: function onReady() {
@@ -243,11 +215,18 @@ var dragBox;var _default =
     carousel: carousel,
     uniDrawer: uniDrawer },
 
-  onLoad: function onLoad() {
+  onLoad: function onLoad() {var _this = this;
     this.$Api.getNews().then(
     function (res) {
-      console.log('getnews');
       console.log(res);
+      _this.title = res.data.data.lists.slice(0, 2);
+    },
+    function (err) {});
+
+    this.$Api.getRotation().then(
+    function (res) {
+      console.log(res);
+      _this.imgList = res.data;
     },
     function (err) {});
 
@@ -308,7 +287,72 @@ var dragBox;var _default =
 
     },
     1000,
-    true) } };exports.default = _default;
+    true),
+
+    more_news: function more_news() {
+      this.linkToTransfer2();
+    },
+    linkToTransfer2: (0, _utils.debounce)(
+    function () {
+      uni.navigateTo({
+        url: '../moreNews/moreNews' });
+
+    },
+    500,
+    true),
+
+    more_announcement: function more_announcement() {
+      this.linkToTransfer3();
+    },
+    linkToTransfer3: (0, _utils.debounce)(
+    function () {
+      uni.navigateTo({
+        url: '../announcement/announcement' });
+
+    },
+    1000,
+    true),
+
+    linkToTransfer4: (0, _utils.debounce)(
+    function (item) {
+
+      this.$Api.getNewsDetail(item).then(
+      function (res) {
+        console.log("qewe");
+        console.log("新闻详情" + res);
+      },
+      function (err) {});
+
+      /* uni.request({
+                          	url: this.BASE_URL + 'home/news/details/' + item + '/',
+                          	method: 'PUT',
+                          	success: res => {
+                          		var ingym = res.data.data;
+                          		this.coo = ingym.text_content;
+                          		var link2 = ingym.link;
+                          		var read_volume = ingym.read_volume;
+                          		var text_content2 = ingym.text_content.replace(/=/g, '_');
+                          		var add_time = ingym.add_time;
+                          		var title = ingym.title;
+                          		if (link2 == null || link2 == '') {
+                          			uni.navigateTo({
+                          				url: '../banner2/banner2?volume=' + read_volume + '&cont=' + encodeURIComponent(text_content2) + '&add=' +
+                          					add_time + '&title=' + title
+                          			});
+                          		} else {
+                          			uni.navigateTo({
+                          				url: `../web2/web2?url=${link2}`
+                          			});
+                          		}
+                          	}
+                          }); */
+    },
+    500,
+    true),
+
+    information: function information(item) {
+      this.linkToTransfer4(item);
+    } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

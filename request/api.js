@@ -2,9 +2,12 @@ import request from './http.js'
 const api=request
 export default {
 	getNews: (data) => { 
-		return api.request('home/news/', 'GET', data)
+		return api.request('home/news/', 'GET', data,true)
 	},
-	getPool: (data) => {
-		return api.request('cloudareadys/', 'GET', data)
+	getNewsDetail: (data) => {
+		return api.request('home/news/details/', 'PUT', data , false)
+	},
+	getRotation: (data) => {
+		return api.request('home/rotation/', 'GET', data,true)
 	},
 }

@@ -1,38 +1,21 @@
 <template>
 	<view class="content">
-		<view class="newsList">
-			<view class="item_list">
-				<image src="../../static/image/newimg.png" mode=""></image>
-				<view class="news_info">
-					<view class="news_info_title">
-						<view class="num_box">
-							<image class="number_img" src="../../static/image/number_tip.png" mode=""></image>
-							<view class="news_len">01</view>
+		<load-refresh ref="loadRefresh" :isRefresh="true" :refreshTime="800" :heightReduce="0" :pageNo="currPage" :totalPageNo="totalPage" @loadMore="loadMore" @refresh="refresh">
+			<view class="newsList">
+				<view class="item_list" @click="information(item.id)" v-for="(item, index) in list" :key="index">
+					<image :src="item.cover_pic" mode=""></image>
+					<view class="news_info">
+						<view class="news_info_title">
+							<view class="num_box">
+								<image class="number_img" src="../../static/image/number_tip.png" mode=""></image>
+								<view class="news_len">{{ index + 1 }}</view>
+							</view>
+							<view>{{ item.title }}</view>
 						</view>
-						<view>文章标题，显示一行,文章标题，显示一行</view>
+						<view class="news_info_con">{{ item.essay_describe }}</view>
 					</view>
-					<view class="news_info_con">很费劲后发的顺丰局的健身房回到就好就是放假还飞机速度还飞机速度和放假的 回到解放后及时发的不是不好</view>
 				</view>
 			</view>
-			
-		</view>
-		<load-refresh ref="loadRefresh" :isRefresh="true" :refreshTime="800" :heightReduce="0" :pageNo="currPage" :totalPageNo="totalPage" @loadMore="loadMore" @refresh="refresh">
-			
-			<!-- <view slot="content-list">
-				<view class="bt" @click="information(item.id)" v-for="(item, index) in list" :key="index">
-					<view class="left">
-						<text class="tex">{{ item.title }}</text>
-						<view class="desc">{{ item.add_time }}
-						</view>
-						<view class="yjj">
-							{{ item.essay_describe}}
-						</view>
-					</view>
-					<view class="right">
-						<image class="ig" :src="item.cover_pic"></image>
-					</view>
-				</view> 
-			</view>-->
 		</load-refresh>
 	</view>
 </template>
@@ -47,7 +30,7 @@ export default {
 			list: '',
 			arr: [],
 			currPage: 1, // 当前页码
-			totalPage: '' // 总页数
+			totalPage: 0 // 总页数
 		};
 	},
 	onLoad() {
@@ -64,9 +47,10 @@ export default {
 				},
 				method: 'GET',
 				success: res => {
+					console.log(res);
 					that.list = res.data.data.lists;
 					this.currPage = res.data.data.pageNum;
-					this.totalPage = res.data.data.totalPage;
+					this.totalPage = parseInt(res.data.data.totalPage);
 				}
 			});
 		},

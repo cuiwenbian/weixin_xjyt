@@ -1947,10 +1947,13 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 var api = _http.default;var _default =
 {
   getNews: function getNews(data) {
-    return api.request('home/news/', 'GET', data);
+    return api.request('home/news/', 'GET', data, true);
   },
-  getPool: function getPool(data) {
-    return api.request('cloudareadys/', 'GET', data);
+  getNewsDetail: function getNewsDetail(data) {
+    return api.request('home/news/details/', 'PUT', data, false);
+  },
+  getRotation: function getRotation(data) {
+    return api.request('home/rotation/', 'GET', data, true);
   } };exports.default = _default;
 
 /***/ }),
@@ -1966,16 +1969,15 @@ var api = _http.default;var _default =
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var BASE_URL = "https://api.ipcn.xyz/api/v1/"; //公共请求头
 var TOKEN = uni.getStorageSync('TOKEN'); //TOKEN
 
-var request = function request(url, method, data) {
+var request = function request(url, method, data) {var ispath = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
   return new Promise(function (resolve, reject) {
     uni.request({
-      url: BASE_URL + url, //仅为示例，并非真实接口地址。
-      data: data,
+      url: ispath ? BASE_URL + url : BASE_URL + url + data,
+      data: ispath ? data : '',
       method: method,
       header: {
-        'custom-header': 'hello', //自定义请求头信息
-        'token': TOKEN },
-
+        Authorization: 'JWT' + ' ' + TOKEN //自定义请求头信息
+      },
       success: function success(res) {
         if (res.statusCode == 200) {
           resolve(res);

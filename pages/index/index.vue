@@ -2,7 +2,7 @@
 	<view>
 		<uni-drawer ref="drawer"></uni-drawer>
 		<wTitleBar title="星际云通" textColor="#fff" @open="hendleclick"></wTitleBar>
-		<carousel :img-list="imgList" url-key="url" @selected="selectedBanner" />
+		<carousel :img-list="imgList" url-key="cover_pic" @selected="selectedBanner" />
 		<view class="content">
 			<view class="ban_btns">
 				<view class="machine_btn" @click="mymachine">
@@ -17,42 +17,30 @@
 			<view class="bulletin_board">
 				<image src="../../static/image/aounce.png" style="width:86rpx;height:32rpx;" mode=""></image>
 				<view class="announcement_txt">公告标题显示在这里，公告标题最多50个字符公告标题最多</view>
-				<image src="../../static/image/more.png" style="width:32rpx;height:26rpx;" mode=""></image>
+				<image src="../../static/image/more.png" style="width:32rpx;height:26rpx;" mode="" @click="more_announcement"></image>
 			</view>
 		</view>
 		<view class="line"></view>
 		<view class="content">
 			<view class="latest_development_of">
 				<view>最新动态</view>
-				<image src="../../static/image/more_news.png" mode=""></image>
+				<image src="../../static/image/more_news.png" mode="" @click="more_news"></image>
 			</view>
 			<view class="newsList">
-				<view class="item_list">
-					<image src="../../static/image/newimg.png" mode=""></image>
+				<view class="item_list" @click="information(item.id)" v-for="(item, index) in title" :key="index">
+					<image :src=" item.cover_pic" mode=""></image>
 					<view class="news_info">
 						<view class="news_info_title">
 							<view class="num_box">
 								<image class="number_img" src="../../static/image/number_tip.png" mode=""></image>
-								<view class="news_len">01</view>
+								<view class="news_len">{{index+1}}</view>
 							</view>
-							<view>文章标题，显示一行,文章标题，显示一行</view>
+							<view>{{ item.title }}</view>
 						</view>
-						<view class="news_info_con">很费劲后发的顺丰局的健身房回到就好就是放假还飞机速度还飞机速度和放假的 回到解放后及时发的不是不好</view>
+						<view class="news_info_con">{{ item.essay_describe}}</view>
 					</view>
 				</view>
-				<view class="item_list">
-					<image src="../../static/image/newimg.png" mode=""></image>
-					<view class="news_info">
-						<view class="news_info_title">
-							<view class="num_box">
-								<image class="number_img" src="../../static/image/number_tip.png" mode=""></image>
-								<view class="news_len">01</view>
-							</view>
-							<view>文章标题，显示一行,文章标题，显示一行</view>
-						</view>
-						<view class="news_info_con">很费劲后发的顺丰局的健身房回到就好就是放假还飞机速度还飞机速度和放假的 回到解放后及时发的不是不好</view>
-					</view>
-				</view>
+				
 			</view>
 		</view>
 	</view>
@@ -73,24 +61,8 @@ export default {
 				autoClose: true,
 				pulldown: true
 			},
-			imgList: [
-				{
-					url: 'https://img9.51tietu.net/pic/2019-091200/vgkpidei2tjvgkpidei2tj.jpg',
-					id: 1
-				},
-				{
-					url: 'https://img9.51tietu.net/pic/2019-091200/euzekmi5m23euzekmi5m23.jpg',
-					id: 2
-				},
-				{
-					url: 'https://img9.51tietu.net/pic/2019-091200/143tt0ta4sr143tt0ta4sr.jpg',
-					id: 3
-				},
-				{
-					url: 'https://img9.51tietu.net/pic/2019-091200/ff1vqwm3q33ff1vqwm3q33.jpg',
-					id: 4
-				}
-			]
+			imgList: [],
+			title:''
 		};
 	},
 	onReady() {
@@ -103,8 +75,15 @@ export default {
 	onLoad() {
 		this.$Api.getNews().then(
 			res => {
-				console.log('getnews');
 				console.log(res);
+				this.title = res.data.data.lists.slice(0, 2);
+			},
+			err => {}
+		);
+		this.$Api.getRotation().then(
+			res => {
+				console.log(res);
+				this.imgList = res.data;
 			},
 			err => {}
 		);
@@ -166,7 +145,71 @@ export default {
 			},
 			1000,
 			true
-		)
+		),
+		more_news: function() {
+			this.linkToTransfer2();
+		},
+		linkToTransfer2: debounce(
+			function() {
+				uni.navigateTo({
+					url: '../moreNews/moreNews'
+				});
+			},
+			500,
+			true
+		),
+		more_announcement() {
+			this.linkToTransfer3();
+		},
+		linkToTransfer3: debounce(
+			function() {
+				uni.navigateTo({
+					url: '../announcement/announcement'
+				});
+			},
+			1000,
+			true
+		),
+		linkToTransfer4: debounce(
+			function(item) {
+				
+				this.$Api.getNewsDetail(item).then(
+					res => {
+						console.log("qewe")
+						console.log("新闻详情"+res);
+					},
+					err => {}
+				);
+				/* uni.request({
+					url: this.BASE_URL + 'home/news/details/' + item + '/',
+					method: 'PUT',
+					success: res => {
+						var ingym = res.data.data;
+						this.coo = ingym.text_content;
+						var link2 = ingym.link;
+						var read_volume = ingym.read_volume;
+						var text_content2 = ingym.text_content.replace(/=/g, '_');
+						var add_time = ingym.add_time;
+						var title = ingym.title;
+						if (link2 == null || link2 == '') {
+							uni.navigateTo({
+								url: '../banner2/banner2?volume=' + read_volume + '&cont=' + encodeURIComponent(text_content2) + '&add=' +
+									add_time + '&title=' + title
+							});
+						} else {
+							uni.navigateTo({
+								url: `../web2/web2?url=${link2}`
+							});
+						}
+					}
+				}); */
+			},
+			500,
+			true
+		),
+		information: function(item) {
+			this.linkToTransfer4(item);
+		},
 	}
 };
 </script>

@@ -1,24 +1,23 @@
 const BASE_URL = "https://api.ipcn.xyz/api/v1/" //公共请求头
 const TOKEN = uni.getStorageSync('TOKEN') //TOKEN
 
-const request = (url, method, data) => {
+const request = (url, method, data, ispath=true) => {
 	return new Promise((resolve, reject) => {
 		uni.request({
-			url: BASE_URL + url, //仅为示例，并非真实接口地址。
-			data: data,
+			url: ispath ? BASE_URL + url : BASE_URL + url + data,
+			data: ispath ? data : '',
 			method: method,
 			header: {
-				'custom-header': 'hello', //自定义请求头信息
-				'token': TOKEN,
+				Authorization: 'JWT' + ' ' + TOKEN //自定义请求头信息
 			},
 			success: (res) => {
 				if (res.statusCode == 200) {
 					resolve(res)
 				} else {
 					uni.showToast({
-						title:"请稍候重试",
-						icon:'none',
-						duration:3000
+						title: "请稍候重试",
+						icon: 'none',
+						duration: 3000
 					})
 				}
 			},

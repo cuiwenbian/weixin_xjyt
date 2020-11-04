@@ -15,14 +15,14 @@
 				</view>
 			</view>
 			<view class="l">
-				<view class="infoo">
+				<view class="infoo" @click="aggrement_power">
 					<view>用户存力协议</view>
 					<image class='right-go' src="../../static/image/jj.png" mode=""></image>
 				</view>
 			</view>
 			
 			<view class="l">
-				<view class="infoo">
+				<view class="infoo" @click="aggrement_seivice">
 					<view>用户服务协议</view>
 					<image class='right-go' src="../../static/image/jj.png" mode=""></image>
 				</view>
@@ -100,7 +100,6 @@
 				this.shade = false;
 			},
 			sure: function() {
-				// uni.getStorageSync('token') == '';
 				uni.removeStorageSync('phone');
 				uni.removeStorageSync('token');
 				uni.removeStorageSync('nowtime');
@@ -108,161 +107,32 @@
 					url: '../login/login'
 				});
 			},
-			// 跳转路劲
+			aggrement_power: function() {
+				this.linkToTransfer();
+			},
 			linkToTransfer: debounce(
 				function() {
 					uni.navigateTo({
-						url: '../../my/personal/personal?phone=' + this.phone
+						url:'../powerAgreement/powerAgreement'
 					});
 				},
-				500,
+				1000,
 				true
 			),
-			personal: function() {
-				this.linkToTransfer();
+			aggrement_seivice: function() {
+				this.linkToTransfer1();
 			},
 			linkToTransfer1: debounce(
 				function() {
-					uni.request({
-						url: this.url + 'linkemails/',
-						method: 'GET',
-						header: {
-							Authorization: 'JWT' + ' ' + uni.getStorageSync('token')
-						},
-						success(res) {
-							if (res.statusCode == 200 || res.statusCode == 201) {
-								uni.navigateTo({
-									url: '../../my/email/email'
-								});
-							}
-							if (res.statusCode == 400) {
-								uni.navigateTo({
-									url: '../../my/unbindemail/unbindemail'
-								});
-							}
-						}
+					uni.navigateTo({
+						url:'../agreement/agreement'
 					});
 				},
 				500,
 				true
 			),
-			mailaddress: function() {
-				this.linkToTransfer1();
-			},
-			linkToTransfer2: debounce(
-				function() {
-					//console.log("身份认证")
-					uni.request({
-						url: this.url + 'realnames/',
-						method: 'GET',
-						header: {
-							Authorization: 'JWT' + ' ' + uni.getStorageSync('token')
-						},
-						sslVerify:false,
-						success(res) {
-							if (res.statusCode == 400) { 
-								uni.showToast({
-									title: '已实名认证',
-									icon: 'none',
-									duration: 2000
-								});
-								return false;
-							}
-							if (res.statusCode == 406) {
-								uni.showToast({
-									title: '身份认证审核中，请等待',
-									icon: 'none',
-									duration: 2000
-								});
-								return false;
-							}
-							if (res.statusCode == 200) {
-								uni.navigateTo({
-									url: '../../my/identity/identity'
-								});
-							}
-						},
-						fail(res) {
-						}
-					});
-				},
-				500,
-				true
-			),
-			authentication: function() {
-				this.linkToTransfer2();
-			},
-			linkToTransfer3: debounce(
-				function() {
-					uni.request({
-						url: this.url + 'updataloginpwd/',
-						method: 'GET',
-						header: {
-							Authorization: 'JWT' + ' ' + uni.getStorageSync('token')
-						},
-						success(res) {
-							if (res.statusCode == 400) {
-								uni.navigateTo({
-									url: '../../my/change-loginPassword/change-loginPassword'
-								});
-							}
-							if (res.statusCode == 200) {
-								uni.navigateTo({
-									url: '../../my/change-pass/change-pass'
-								});
-							}
-						}
-					});
-				},
-				500,
-				true
-			),
-			loginpassword: function() {
-				this.linkToTransfer3();
-			},
-			linkToTransfer4: debounce(
-				function() {
-					var that = this;
-					uni.request({
-						url: this.url + 'setmoneys/',
-						method: 'GET',
-						header: {
-							Authorization: 'JWT' + ' ' + uni.getStorageSync('token')
-						},
-						success(res) {
-							if (res.statusCode == 302) {
-								uni.showToast({
-									title: '用户未绑定邮箱',
-									icon: 'none',
-									duration: 2000
-								});
-								return false;
-							}
-							if (res.statusCode == 400) {
-								uni.navigateTo({
-									url: '../../my/change-password/change-password'
-								});
-							}
-							if (res.statusCode == 200) {
-								uni.navigateTo({
-									url: '../../my/trade-password/trade-password'
-								});
-							}
-						}
-					});
-				},
-				500,
-				true
-			),
-			radepassword: function() {
-				this.linkToTransfer4();
-			},
-			// 返回
-			onBack(){
-				uni.navigateBack({
-					delta:1
-				})
-			}
+			
+			
 		}
 	};
 </script>
