@@ -88,5 +88,5 @@
   "usingComponents": {
     "w-title-bar": "/components/w-titleBar/w-titleBar"
   },
-  "sitemapLocation": "sitemap.json"
+  "sitemapLocation": "sitemap64.json"
 }

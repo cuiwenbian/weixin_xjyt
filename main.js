@@ -8,7 +8,7 @@ Vue.config.productionTip = false
 
 Vue.prototype.$Api = Api//挂载全局
 Vue.prototype.url = 'https://api.ipcn.xyz/api/v1/'
-Vue.prototype.urla = 'https://api.ipcn.xyz/'
+Vue.prototype.urla = 'http://api.ipcn.xyz/'
 // Vue.prototype.url = 'https://apitest.ipcn.xyz/api/v1/'
 // Vue.prototype.url = 'http://192.168.1.158:8000/api/v1/'
 App.mpType = 'app'

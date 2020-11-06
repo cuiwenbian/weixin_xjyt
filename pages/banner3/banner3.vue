@@ -156,7 +156,7 @@
 		color: #333333;
 	}
 	.tt{
-		font-size: 18rpx;
+		font-size: 20rpx;
 		font-weight: 400;
 		color: #CECECE;
 	}

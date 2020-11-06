@@ -17,7 +17,7 @@ _vue.default.config.productionTip = false;
 
 _vue.default.prototype.$Api = _api.default; //挂载全局
 _vue.default.prototype.url = 'https://api.ipcn.xyz/api/v1/';
-_vue.default.prototype.urla = 'https://api.ipcn.xyz/';
+_vue.default.prototype.urla = 'http://api.ipcn.xyz/';
 // Vue.prototype.url = 'https://apitest.ipcn.xyz/api/v1/'
 // Vue.prototype.url = 'http://192.168.1.158:8000/api/v1/'
 _App.default.mpType = 'app';

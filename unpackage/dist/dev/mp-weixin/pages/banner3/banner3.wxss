@@ -66,7 +66,7 @@ uni-rich-text ._img.data-v-0df22416 {
 		color: #333333;
 }
 .tt.data-v-0df22416{
-		font-size: 18rpx;
+		font-size: 20rpx;
 		font-weight: 400;
 		color: #CECECE;
 }

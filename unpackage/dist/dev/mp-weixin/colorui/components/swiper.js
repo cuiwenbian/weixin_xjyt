@@ -171,11 +171,16 @@ var _utils = __webpack_require__(/*! @/common/utils.js */ 19); //
 //
 //
 //
-var _default = { data: function data() {return { cardCur: 0, swiperList: [], dotStyle: false, towerStart: 0, direction: '' };}, onLoad: function onLoad() {this.TowerSwiper('swiperList'); // 初始化towerSwiper 传已有的数组名即可
-  }, mounted: function mounted() {var that = this;uni.request({ url: this.url + 'home/rotation/', method: 'GET', // header: {
+var _default = { data: function data() {return { cardCur: 0, swiperList: [], dotStyle: false, towerStart: 0, direction: '' };}, onLoad: function onLoad() {console.log('onload');}, onShow: function onShow() {console.log('onshow');this.TowerSwiper('swiperList');}, mounted: function mounted() {console.log('mounted');this.TowerSwiper('swiperList');var that = this;uni.request({ url: this.url + 'home/rotation/', method: 'GET', // header: {
       // 	Authorization: 'JWT' + ' ' + uni.getStorageSync('token')
       // },
-      success: function success(res) {that.swiperList = res.data;} });}, methods: { linkToTransfer4: (0, _utils.debounce)(function (item) {var that = this;
+      success: function success(res) {that.swiperList = res.data;} });
+
+  },
+  methods: {
+    linkToTransfer4: (0, _utils.debounce)(
+    function (item) {
+      var that = this;
       uni.request({
         url: this.url + 'home/rotation/details/' + item + '/',
         method: 'PUT',

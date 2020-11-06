@@ -40,10 +40,15 @@ export default {
 		};
 	},
 	onLoad() {
+		console.log('onload')
+	},
+	onShow() {
+		console.log('onshow')
 		this.TowerSwiper('swiperList');
-		// 初始化towerSwiper 传已有的数组名即可
 	},
 	mounted() {
+		console.log('mounted')
+		this.TowerSwiper('swiperList');
 		var that = this;
 		uni.request({
 			url: this.url + 'home/rotation/',
@@ -189,7 +194,6 @@ export default {
         border-radius: 3rpx;
         margin-right:8rpx;
       }
-
       .active {
         width: 33rpx;
         height: 5rpx;
