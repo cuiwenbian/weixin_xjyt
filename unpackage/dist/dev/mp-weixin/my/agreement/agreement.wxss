@@ -23,7 +23,9 @@
 	line-height: 60rpx;
 	margin-top: 19rpx;
 	color: #fff;
-	border-radius: 50rpx;
+	-webkit-border-radius: 50rpx;
+	        border-radius: 50rpx;
+	background-image: -webkit-gradient(linear, left top, right top, from(#01c774), to(#01dda9));
 	background-image: -webkit-linear-gradient(left, #01c774, #01dda9);
 	background-image: linear-gradient(to right, #01c774, #01dda9);
 }
@@ -34,7 +36,9 @@
 	line-height: 60rpx;
 	margin-top: 19rpx;
 	color: #fff;
-	border-radius: 50rpx;
+	-webkit-border-radius: 50rpx;
+	        border-radius: 50rpx;
+	background-image: -webkit-gradient(linear, left top, right top, from(#01c774), to(#01dda9));
 	background-image: -webkit-linear-gradient(left, #01c774, #01dda9);
 	background-image: linear-gradient(to right, #01c774, #01dda9);
 }

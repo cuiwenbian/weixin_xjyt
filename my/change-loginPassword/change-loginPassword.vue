@@ -352,7 +352,9 @@
 		margin-top: 35rpx;
 		border: none;
 	}
-	
+	.getcode::after {
+		border: none;
+	}
 	button,button[disabled] {
 		background: none !important;
 		border: none !important;

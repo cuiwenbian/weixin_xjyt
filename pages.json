@@ -25,9 +25,27 @@
 			}
 		},
 		{
-			"path": "pages/register/register",
+			"path": "pages/regist/regist",
 			"style": {
 				"navigationStyle":"custom"
+			}
+		},
+		{
+			"path": "pages/set_password/set_password",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/reset_password/reset_password",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/getBackPassword/getBackPassword",
+			"style": {
+				"navigationStyle": "custom"
 			}
 		},
 		{
@@ -92,6 +110,18 @@
 					}
 				},
 				{
+					"path": "sign/index",
+					"style": {
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "machine-detail/machine-detail",
+					"style": {
+						"navigationBarTitleText": "服务器详情"
+					}
+				},
+				{
 					"path": "suggest/suggest",
 					"style": {
 						"navigationBarTitleText": "建议反馈"
@@ -105,6 +135,12 @@
 				},
 				{
 					"path": "helping/helping",
+					"style": {
+						"navigationStyle":"custom"
+					}
+				},
+				{
+					"path": "problem_details/problem_detail",
 					"style": {
 						"navigationStyle":"custom"
 					}
@@ -188,6 +224,12 @@
 					}
 				},
 				{
+					"path": "choose-address/choose-address",
+					"style": {
+						"navigationBarTitleText": "地址薄"
+					}
+				},
+				{
 					"path": "email/email",
 					"style": {
 						"navigationBarTitleText": "绑定邮箱"
@@ -262,14 +304,14 @@
 		"spacing": "3px",
 		"list": [{
 			"pagePath": "pages/index/index",
-			"iconPath": "static/image/tab_icon2.png",
+			"iconPath": "static/image/tab_icon3.png",
 			"selectedIconPath": "static/image/tab_icon1.png",
-			"text": "组件"
+			"text": "首页"
 		}, {
 			"pagePath": "pages/my_income/my_income",
 			"iconPath": "static/image/tab_icon2.png",
-			"selectedIconPath": "static/image/tab_icon1.png",
-			"text": "接口"
+			"selectedIconPath": "static/image/tab_icon4.png",
+			"text": "收益"
 		}]
 	},
 	"globalStyle": {

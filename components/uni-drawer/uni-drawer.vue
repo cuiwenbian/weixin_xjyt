@@ -7,21 +7,21 @@
 			:style="{ width: drawerWidth + 'px' }"
 		>
 			<!-- <slot /> -->
-			<view style="padding-top:133rpx;padding-left: 37rpx;box-sizing: border-box;">
-				<view class="art_time" v-if="hasLogin">
+			<view style="padding-top:186rpx;padding-left: 30rpx;box-sizing: border-box;">
+				<view class="art_time" v-if="token" @click="go_peo">
 					<view class="avator_img"><image src="../../static/w-titleBar/avators.png" mode=""></image></view>
 					<view class="descc">
-						<view class="gg">Hi,李超</view>
+						<view class="gg">{{ phone }}</view>
 						<view class="tt">欢迎来到星际云通</view>
 					</view>
 				</view>
 				<view v-else class="art_time">
 					<view class="descc">
-						<view class="gg">点击登录</view>
+						<view class="gg" @click="goLogin">点击登录</view>
 						<view class="tt">欢迎来到星际云通</view>
 					</view>
 				</view>
-				<view class="person_list" >
+				<view class="person_list">
 					<view class="person_evelist" @click="go_person">
 						<image src="../../static/image/account_icon.png" style="width:39rpx;height:41rpx;" mode=""></image>
 						<view>账户安全</view>
@@ -41,6 +41,7 @@
 				</view>
 			</view>
 		</view>
+		 <Modal v-model="show" title='提示' :text='tips' @cancel='cancel' @confirm='confirm'/>
 	</view>
 </template>
 
@@ -57,7 +58,12 @@
  * @property {Number} width 抽屉的宽度 ，仅 vue 页面生效
  * @event {Function} close 组件关闭时触发事件
  */
+import Modal from '@/components/x-modal/x-modal'
+import {
+		debounce
+	} from '@/common/utils.js';
 export default {
+	 components: {Modal},
 	name: 'UniDrawer',
 	props: {
 		/**
@@ -86,7 +92,7 @@ export default {
 		 */
 		width: {
 			type: Number,
-			default: 220
+			default: 250
 		}
 	},
 	data() {
@@ -96,9 +102,14 @@ export default {
 			rightMode: false,
 			watchTimer: null,
 			drawerWidth: 220,
-			hasLogin:true
+			hasLogin: true,
+			token: uni.getStorageSync('token'),
+			phone: uni.getStorageSync('phone'),
+			show:false,
+			tips:''
 		};
 	},
+	
 	created() {
 		// #ifndef APP-NVUE
 		this.drawerWidth = this.width;
@@ -107,6 +118,9 @@ export default {
 	},
 	methods: {
 		clear() {},
+		confirm(){
+			this.show=false
+		},
 		close(type) {
 			// fixed by mehaotian 抽屉尚未完全关闭或遮罩禁止点击时不触发以下逻辑
 			if ((type === 'mask' && !this.maskClick) || !this.visibleSync) return;
@@ -130,27 +144,104 @@ export default {
 				status ? 50 : 300
 			);
 		},
-		go_person(){
+		goLogin() {
 			uni.navigateTo({
-				url:'../../my/account_security/account_security'
-			})
+				url: '../../pages/login/login'
+			});
 		},
-		go_address(){
+		go_peo(){
 			uni.navigateTo({
-				url:'../../my/address/address'
-			})
+				url: '../../my/personal/personal'
+			});
 		},
-		go_help(){
-			uni.navigateTo({
-				url:'../../my/helping/helping'
-			})
+		go_person() {
+			var that=this;
+			if(!this.token){
+				this.show=true;
+				this.tips="请先登录您的账号"
+				return
+			}else{
+				uni.navigateTo({
+					url: '../../my/account_security/account_security'
+				});
+			}
+			
 		},
-		go_aboutus(){
-			uni.navigateTo({
-				url:'../../my/about_us/about_us'
-			})
-		}
 		
+		linkToTransfer3: debounce(
+			function() {
+				var that=this;
+				uni.request({
+					url: this.url + 'walletaddresss/',
+					method: 'GET',
+					header: {
+						Authorization: 'JWT' + ' ' + uni.getStorageSync('token')
+					},
+					success(res) {
+						if (res.statusCode == 400) {
+							that.show=true;
+							that.tips="用户未实名认证"
+							
+						}
+						if (res.statusCode == 201) {
+							that.show=true;
+							that.tips="身份认证审核中，请等待"
+							
+						}
+						if (res.statusCode == 200) {
+						
+							uni.navigateTo({
+								url: '../../my/address/address'
+							});
+						}
+						if (res.statusCode == 302) {
+							that.show=true;
+							that.tips="用户未设置交易密码"
+							
+						}
+					}
+				});
+			},
+			1000,
+			true
+		),
+		go_address: function() {
+			var that=this;
+			if(!this.token){
+				this.show=true;
+				this.tips="请先登录您的账号"
+				return
+			}else{
+				this.linkToTransfer3();
+			}
+			
+		},
+		go_help() {
+			var that=this;
+			if(!this.token){
+				this.show=true;
+				this.tips="请先登录您的账号"
+				return
+			}else{
+				uni.navigateTo({
+					url: '../../my/helping/helping'
+				});
+			}
+			
+		},
+		go_aboutus() {
+			var that=this;
+			if(!this.token){
+				this.show=true;
+				this.tips="请先登录您的账号"
+				return
+			}else{
+				uni.navigateTo({
+					url: '../../my/about_us/about_us'
+				});
+			}
+			
+		}
 	}
 };
 </script>
@@ -169,9 +260,30 @@ $drawer-width: 220px;
 	right: 0;
 	bottom: 0;
 	overflow: hidden;
-	z-index: 99999;
+	z-index: 9999999 !important;
 }
-
+.toast{
+	width:360rpx;
+	height:30rpx;
+	padding:15rpx 20rpx;
+	border-radius: 10rpx;
+	position: fixed;
+	top:50%;
+	bottom:50%;
+	left:calc(50% - 140rpx);
+	right:50%;
+	overflow: hidden;
+	color:#FFFFFF;
+	opacity: .5;
+	line-height: 30rpx;
+	text-align: center;
+	background-color: rgba(0,0,0,.8);
+	z-index: 99999999 !important;
+	
+}
+.isHidden{
+	display: none;
+}
 .uni-drawer__content {
 	/* #ifndef APP-NVUE */
 	display: block;
@@ -247,11 +359,12 @@ $drawer-width: 220px;
 	height: 100%;
 }
 .descc {
+	width: 200rpx;
 	height: 100%;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-around;
-	margin-left: 20rpx;
+	margin-left: 10rpx;
 }
 .gg {
 	font-size: 30rpx;
@@ -263,19 +376,19 @@ $drawer-width: 220px;
 	font-weight: 400;
 	color: #b7b7b7;
 }
-.person_list{
+.person_list {
 	display: flex;
 	justify-content: space-between;
 	flex-direction: column;
 	margin-top: 123rpx;
 }
-.person_evelist{
+.person_evelist {
 	display: flex;
 	align-items: center;
 	height: 52rpx;
 	margin-bottom: 82rpx;
 }
-.person_evelist>view{
+.person_evelist > view {
 	margin-left: 30rpx;
 	font-size: 28rpx;
 	font-weight: 400;

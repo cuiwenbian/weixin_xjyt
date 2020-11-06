@@ -35,6 +35,7 @@
 
 <script>
 	import { debounce } from '@/common/utils.js';
+	var check = require('../../common/utils.js');
 export default {
     data() {
         return {
@@ -73,7 +74,7 @@ export default {
         },
 		checkPwd:function(e){
 			this.newPassword = e.detail.value;
-			var f = this.global_.checkPassword(this.newPassword);
+			var f = check.checkPassword(this.newPassword);
 			if (!f) {
 			    uni.showToast({
 			        title: '交易密码为6位数字',
@@ -117,7 +118,7 @@ export default {
 			    });
 			    return false;
 			}
-            var f = this.global_.checkPassword(this.newPassword);
+            var f = check.checkPassword(this.newPassword);
             if (!f) {
                 uni.showToast({
                     title: '交易密码为6位数字',

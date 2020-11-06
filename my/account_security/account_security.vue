@@ -2,20 +2,20 @@
 	<view>
 		<view class="maincontent">
 			<view class="s-line"></view>
-			<view class="l" @click="personal">
+			<!-- <view class="l" @click="personal">
 				<view class="infoo">
 					<view>手机号</view>
 					<view class="info_d">
-						<view>239803892</view>
+						<view>{{ phone }}</view>
 						<image class="right-go" src="../../static/image/jj.png" mode=""></image>
 					</view>
 				</view>
-			</view>
+			</view> -->
 			<view class="l" @click="mailaddress">
 				<view class="infoo">
 					<view>邮箱</view>
 					<view class="info_d">
-						<view>未绑定</view>
+						<view>{{ isBind }}</view>
 						<image class="right-go" src="../../static/image/jj.png" mode=""></image>
 					</view>
 				</view>
@@ -24,7 +24,7 @@
 				<view class="infoo">
 					<view>交易密码</view>
 					<view class="info_d">
-						<view>未设置</view>
+						<view>{{ isSetPwd }}</view>
 						<image class="right-go" src="../../static/image/jj.png" mode=""></image>
 					</view>
 				</view>
@@ -33,7 +33,7 @@
 				<view class="infoo">
 					<view>实名认证</view>
 					<view class="info_d">
-						<view>未认证</view>
+						<view>{{ isIndenty }}</view>
 						<image class="right-go" src="../../static/image/jj.png" mode=""></image>
 					</view>
 				</view>
@@ -56,7 +56,11 @@ export default {
 		return {
 			phone: '',
 			version: uni.getStorageSync('version') || '1.1.0',
-			shade: false
+			shade: false,
+			status:'',
+			isBind:'未绑定',
+			isSetPwd:'未设置',
+			isIndenty:'未认证'
 		};
 	},
 	onLoad() {
@@ -79,6 +83,62 @@ export default {
 					.replace(/,/g, '');
 			this.phone = phone;
 		}
+	},
+	onShow() {
+		var that=this;
+		uni.request({
+			url: this.url + 'status/', //资产收益
+			method: 'GET',
+			header: {
+				Authorization: 'JWT' + ' ' + uni.getStorageSync('token')
+			},
+			success(res) {
+				console.log("信息状态")
+				console.log(res);
+				that.status=res.data.data;
+				console.log(that.status)
+				console.log(that.status.authentication)
+				switch(that.status.authentication) {
+				     case 0:
+				        that.isIndenty="未认证"
+				        break;
+				     case 1:
+				        that.isIndenty="已认证"
+				        break;
+					case 2:
+						that.isIndenty="审核中"
+						break;
+					case 4:
+						that.isIndenty="审核未通过"
+						break;
+				     default:
+				        that.isIndenty="未认证"
+				}
+				switch(that.status.email) {
+				     case 0:
+				        that.isBind="未绑定"
+				        break;
+				     case 1:
+				        that.isBind="已绑定"
+				        break;
+					
+				     default:
+				        that.isBind="未绑定"
+				}
+				switch(that.status.capital) {
+				     case 0:
+				        that.isSetPwd="未设置"
+				        break;
+				     case 1:
+				       that.isSetPwd="已设置"
+				        break;
+					
+				     default:
+				        that.isSetPwd="未设置"
+				}
+				
+			}
+		});
 	},
 	onHide() {
 		this.shade = false;

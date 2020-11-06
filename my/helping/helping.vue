@@ -26,7 +26,7 @@
 				<view class="list" v-if="tabCurrentIndex === 0">
 					<scroll-view class="scroll-view" scroll-y="true" @scroll='scroll' :scroll-top="scrollTop">
 								<view class="ques_list" @click="problem_detail(item.id)" v-for="(item,index) in question" :key="index">
-									<text>{{index+1}}</text>
+									<text>{{index+1+'.'}}</text>
 									<text @click="problem_detail(item.id)">{{item.question}}</text>
 								</view>
 					</scroll-view>
@@ -34,7 +34,7 @@
 				<view class="list" v-if="tabCurrentIndex === 1">
 					<scroll-view class="scroll-view" scroll-y="true" @scroll='scroll' :scroll-top="scrollTop">
 						<view class="ques_list" @click="problem_detail(item.id)" v-for="(item,index) in question" :key="index">
-							<text>{{index+1}}</text>
+							<text>{{index+1+'.'}}</text>
 							<text>{{item.question}}</text>
 						</view>
 					</scroll-view>
@@ -42,7 +42,7 @@
 				<view class="list" v-if="tabCurrentIndex === 2">
 					<scroll-view class="scroll-view" scroll-y="true" @scroll='scroll' :scroll-top="scrollTop">
 						<view class="ques_list" @click="problem_detail(item.id)" v-for="(item,index) in question" :key="index">
-							<text>{{index+1}}</text>
+							<text>{{index+1+'.'}}</text>
 							<text>{{item.question}}</text>
 						</view>
 					</scroll-view>
@@ -50,7 +50,7 @@
 				<view class="list" v-if="tabCurrentIndex === 3">
 					<scroll-view class="scroll-view" scroll-y="true" @scroll='scroll' :scroll-top="scrollTop">
 						<view class="ques_list" @click="problem_detail(item.id)" v-for="(item,index) in question" :key="index">
-							<text>{{index+1}}</text>
+							<text>{{index+1+'.'}}</text>
 							<text>{{item.question}}</text>
 						</view>
 					</scroll-view>
@@ -371,7 +371,7 @@
 
 	.ques_list>text {
 		display: block;
-		width:86%;
+		/* width:86%; */
 		height:50rpx;
 		line-height: 50rpx;
 		font-size: 26rpx;

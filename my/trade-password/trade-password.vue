@@ -46,6 +46,7 @@
 
 <script>
 	import {debounce} from '@/common/utils.js'
+	var check = require('../../common/utils.js');
 	const cutdownTime = 120;
 export default {
 	data() {
@@ -118,7 +119,7 @@ export default {
 		},
 		checkPwd:function(e){
 			this.password = e.detail.value;
-			var f = this.global_.checkPassword(this.password);
+			var f = check.checkPassword(this.password);
 			if (!f) {
 			    uni.showToast({
 			        title: '交易密码为6位数字',
@@ -192,7 +193,7 @@ export default {
 				});
 				return false;
 			}
-			var f = this.global_.checkPassword(this.password);
+			var f = check.checkPassword(this.password);
 			if (!f) {
 				uni.showToast({
 					title: '交易密码为6位数字',
@@ -300,7 +301,9 @@ page {
 		margin-top: 35rpx;
 		border: none;
 	}
-
+ .getcode::after {
+    	border: none;
+    }
 	button,button[disabled] {
 		background: none !important;
 		border: none !important;

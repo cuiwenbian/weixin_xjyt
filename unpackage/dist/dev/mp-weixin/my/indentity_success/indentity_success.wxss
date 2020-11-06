@@ -25,7 +25,8 @@
 .authentication_information{
 	width: 100%;
 	padding:0 42rpx;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 	margin-top: 45rpx;
 }
 .listline{

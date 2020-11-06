@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "我的存力",
+  "usingComponents": {
+    "cmd-circle": "/components/cmd-circle/cmd-circle"
+  }
+}

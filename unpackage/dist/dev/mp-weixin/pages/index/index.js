@@ -103,7 +103,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   uniDrawer: function() {
-    return __webpack_require__.e(/*! import() | components/uni-drawer/uni-drawer */ "components/uni-drawer/uni-drawer").then(__webpack_require__.bind(null, /*! @/components/uni-drawer/uni-drawer.vue */ 267))
+    return __webpack_require__.e(/*! import() | components/uni-drawer/uni-drawer */ "components/uni-drawer/uni-drawer").then(__webpack_require__.bind(null, /*! @/components/uni-drawer/uni-drawer.vue */ 419))
   }
 }
 var render = function() {
@@ -191,7 +191,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _utils = __webpack_require__(/*! @/common/utils.js */ 19);var carousel = function carousel() {__webpack_require__.e(/*! require.ensure | components/vear-carousel/vear-carousel */ "components/vear-carousel/vear-carousel").then((function () {return resolve(__webpack_require__(/*! @/components/vear-carousel/vear-carousel */ 274));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var uniDrawer = function uniDrawer() {__webpack_require__.e(/*! require.ensure | components/uni-drawer/uni-drawer */ "components/uni-drawer/uni-drawer").then((function () {return resolve(__webpack_require__(/*! @/components/uni-drawer/uni-drawer.vue */ 267));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
+var _utils = __webpack_require__(/*! @/common/utils.js */ 19);var bwSwiper = function bwSwiper() {__webpack_require__.e(/*! require.ensure | colorui/components/swiper */ "colorui/components/swiper").then((function () {return resolve(__webpack_require__(/*! @/colorui/components/swiper.vue */ 426));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var uniDrawer = function uniDrawer() {__webpack_require__.e(/*! require.ensure | components/uni-drawer/uni-drawer */ "components/uni-drawer/uni-drawer").then((function () {return resolve(__webpack_require__(/*! @/components/uni-drawer/uni-drawer.vue */ 419));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var anNoticeBar = function anNoticeBar() {__webpack_require__.e(/*! require.ensure | components/an-notice-bar */ "components/an-notice-bar").then((function () {return resolve(__webpack_require__(/*! @/components/an-notice-bar.vue */ 433));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
+
 
 var dragBox;var _default =
 {
@@ -205,21 +206,24 @@ var dragBox;var _default =
         pulldown: true },
 
       imgList: [],
-      title: '' };
+      title: '',
+      token: uni.getStorageSync('token') };
 
   },
   onReady: function onReady() {
     dragBox = this.$refs.dragBox;
   },
   components: {
-    carousel: carousel,
-    uniDrawer: uniDrawer },
+    bwSwiper: bwSwiper,
+    uniDrawer: uniDrawer,
+    anNoticeBar: anNoticeBar },
 
+  computed: {},
   onLoad: function onLoad() {var _this = this;
     this.$Api.getNews().then(
     function (res) {
       console.log(res);
-      _this.title = res.data.data.lists.slice(0, 2);
+      _this.title = res.data.data.lists.slice(0, 5);
     },
     function (err) {});
 
@@ -230,6 +234,9 @@ var dragBox;var _default =
     },
     function (err) {});
 
+  },
+  onHide: function onHide() {
+    this.$refs.drawer.close();
   },
   methods: {
     selectedBanner: function selectedBanner(item, index) {
@@ -267,9 +274,18 @@ var dragBox;var _default =
     },
     linkToTransfer: (0, _utils.debounce)(
     function () {
-      uni.navigateTo({
-        url: '../../my/power/power' });
+      if (!this.token) {
+        uni.showToast({
+          title: '请先登录您的账号',
+          duration: 3000,
+          icon: 'none' });
 
+        return;
+      } else {
+        uni.navigateTo({
+          url: '../../my/power/power' });
+
+      }
     },
     1000,
     true),
@@ -282,9 +298,18 @@ var dragBox;var _default =
     },
     linkToTransfer1: (0, _utils.debounce)(
     function () {
-      uni.navigateTo({
-        url: '../../my/machine/machine' });
+      if (!this.token) {
+        uni.showToast({
+          title: '请先登录您的账号',
+          duration: 3000,
+          icon: 'none' });
 
+        return;
+      } else {
+        uni.navigateTo({
+          url: '../../my/machine/machine' });
+
+      }
     },
     1000,
     true),
@@ -314,44 +339,111 @@ var dragBox;var _default =
     true),
 
     linkToTransfer4: (0, _utils.debounce)(
-    function (item) {
-
-      this.$Api.getNewsDetail(item).then(
+    function (item) {var _this2 = this;
+      var data = item;
+      this.$Api.getNewsDetail(data).then(
       function (res) {
-        console.log("qewe");
-        console.log("新闻详情" + res);
+        var ingym = res.data.data;
+        _this2.coo = ingym.text_content;
+        var link2 = ingym.link;
+        var read_volume = ingym.read_volume;
+        var text_content2 = ingym.text_content.replace(/=/g, '_');
+        var add_time = ingym.add_time;
+        var title = ingym.title;
+        if (link2 == null || link2 == '') {
+          uni.navigateTo({
+            url: '../banner2/banner2?volume=' + read_volume + '&cont=' + encodeURIComponent(text_content2) + '&add=' + add_time + '&title=' + title });
+
+        } else {
+          uni.navigateTo({
+            url: "../web2/web2?url=".concat(link2) });
+
+        }
       },
       function (err) {});
 
-      /* uni.request({
-                          	url: this.BASE_URL + 'home/news/details/' + item + '/',
-                          	method: 'PUT',
-                          	success: res => {
-                          		var ingym = res.data.data;
-                          		this.coo = ingym.text_content;
-                          		var link2 = ingym.link;
-                          		var read_volume = ingym.read_volume;
-                          		var text_content2 = ingym.text_content.replace(/=/g, '_');
-                          		var add_time = ingym.add_time;
-                          		var title = ingym.title;
-                          		if (link2 == null || link2 == '') {
-                          			uni.navigateTo({
-                          				url: '../banner2/banner2?volume=' + read_volume + '&cont=' + encodeURIComponent(text_content2) + '&add=' +
-                          					add_time + '&title=' + title
-                          			});
-                          		} else {
-                          			uni.navigateTo({
-                          				url: `../web2/web2?url=${link2}`
-                          			});
-                          		}
-                          	}
-                          }); */
     },
     500,
     true),
 
     information: function information(item) {
       this.linkToTransfer4(item);
+    },
+    linkToTransfer5: (0, _utils.debounce)(
+    function (id) {
+      var that = this;
+      var data = id;
+      this.$Api.getRotationDetail(data).then(function (res) {
+        var link = res.data.data[0].link;
+        var add_time = res.data.data[0].add_time;
+        var title = res.data.data[0].title;
+        var text_content = res.data.data[0].text_content.replace(/=/g, '_');
+        var prev_qus = res.data.data[1].title;
+        var prev_id = res.data.data[1].id;
+        var next_id = res.data.data[2].id;
+        var next_qus = res.data.data[2].title;
+        if (link == null || link == '') {
+          uni.setStorageSync('index-banner-content', text_content);
+          uni.navigateTo({
+            url:
+            '../banner/banner?add_time=' +
+            add_time +
+            '&title=' +
+            title +
+            '&prev_qus=' +
+            prev_qus +
+            '&prev_id=' +
+            prev_id +
+            '&next_qus=' +
+            next_qus +
+            '&next_id=' +
+            next_id });
+
+        } else {
+          uni.navigateTo({
+            url: "../web1/web1?url=".concat(link) });
+
+        }
+      });
+      /* uni.request({
+          		url: this.url + 'home/rotation/details/' + item + '/',
+          		method: 'PUT',
+          		success(res) {
+          			console.log(res);
+          			var link = res.data.data[0].link;
+          			var add_time = res.data.data[0].add_time;
+          			var title=res.data.data[0].title;
+          			var text_content = res.data.data[0].text_content.replace(/=/g, '_');
+          			var prev_qus = res.data.data[1].title;
+          			var prev_id = res.data.data[1].id;
+          			var next_id = res.data.data[2].id;
+          			var next_qus = res.data.data[2].title;
+          			if (link == null || link == '') {
+          				uni.setStorageSync('index-banner-content', text_content);
+          				uni.navigateTo({
+          					url: '../banner/banner?add_time='+add_time+'&title=' + title+'&prev_qus=' + prev_qus+'&prev_id=' + prev_id+'&next_qus=' + next_qus+'&next_id=' + next_id
+          				});
+          			} else {
+          				uni.navigateTo({
+          					url: `../web1/web1?url=${link}`
+          				});
+          			}
+          		}
+          	}); */
+    },
+    500,
+    true),
+
+    some: function some(item) {
+      var id = item.id;
+      this.linkToTransfer5(id);
+    },
+    go: function go(e) {
+      //console.log(e)
+      var id = parseInt(e);
+      uni.navigateTo({
+        url: '../banner3/banner3?id=' + id });
+
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

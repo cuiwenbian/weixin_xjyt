@@ -8,12 +8,12 @@
 					<view style="font-family: 'myface';">v{{ version }}</view>
 				</view>
 			</view>
-			<view class="l">
+			<!-- <view class="l">
 				<view class="infoo">
 					<view>更新日志</view>
 					<image class='right-go' src="../../static/image/jj.png" mode=""></image>
 				</view>
-			</view>
+			</view> -->
 			<view class="l">
 				<view class="infoo" @click="aggrement_power">
 					<view>用户存力协议</view>
@@ -37,7 +37,7 @@
 			<view class="l">
 				<view class="infoo">
 					<view>微信公众号</view>
-					<view style="font-family: 'myface';">www.ipcn.xyz</view>
+					<view style="font-family: 'myface';">星际云通 IPFS Fileocin</view>
 				</view>
 			</view>
 			
@@ -54,7 +54,7 @@
 		data() {
 			return {
 				phone: '',
-				version: uni.getStorageSync('version')||'1.1.0',
+				version: '3.1.1',
 				shade: false,
 			};
 		},

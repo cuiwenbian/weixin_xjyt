@@ -10,4 +10,13 @@ export default {
 	getRotation: (data) => {
 		return api.request('home/rotation/', 'GET', data,true)
 	},
+	getRotationDetail: (data) => {
+		return api.request('home/rotation/details/', 'PUT', data , false)
+	},
+	getAounce: (data) => {
+		return api.request('home/', 'GET', data , true)
+	},
+	getAounceDetail: (data) => {
+		return api.request('home/userhome/details/', 'GET', data , false)
+	},
 }

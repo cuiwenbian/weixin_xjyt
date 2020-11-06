@@ -7,13 +7,12 @@
 			<view class="art_tit">
 				{{title}}
 			</view>
-			<view class="art_time">
-				<view class="avator_img"><image src="../../static/w-titleBar/avators.png" mode=""></image></view>
+			<view class="art_time">{{add}}</view>
+				<!-- <view class="avator_img"><image src="../../static/w-titleBar/avators.png" mode=""></image></view>
 			    <view class="descc">
 					<view class="gg">星际云通官方</view>
-					<view class="tt">{{add}}</view>
-				</view>
-			</view>
+					
+				</view> -->
 			<view class="conten">
 				<rich-text :nodes="aa"></rich-text>
 			</view>
@@ -41,7 +40,7 @@
 		onLoad(option) {
 			this.title = option.title;
 			if(option.title.length>6){
-				this.tit = option.title.substring(0, 6) + '...';
+				this.tit = option.title.substring(0, 10) + '...';
 			}else{
 				this.tit = option.title
 			}
@@ -87,18 +86,16 @@
 		color: #333333;
 		font-weight: 800;
 	}
-
-	.art_time {
-		width: 100%;
-		height: 112rpx;
-		padding-bottom: 30rpx;
-		box-sizing: border-box;
-		font-size: 24rpx;
-		color: #999999;
-		border-bottom: 1rpx solid #EBEBEB;
-		display: flex;
-		align-items: center;
-	}
+    .art_time {
+    	width: 100%;
+    	height: 82rpx;
+    	line-height: 82rpx;
+    	font-size: 24rpx;
+    	color: #999999;
+    	text-align: right;
+    	border-bottom: 1rpx solid #EBEBEB;
+    }
+	
 	.avator_img{
 		width: 65rpx;
 		height:65rpx;

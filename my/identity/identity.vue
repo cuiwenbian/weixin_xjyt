@@ -17,16 +17,16 @@
 		<view class="line_t">上传身份证照片</view>
 		<view class="uploadfile">
 			<view class="list" v-show="p_flag" @click="chooseImageTap" :data-flag="positive">
-				<image class="up-card" src="../../static/image/idcard_frond.png" mode=""></image>
+				<image class="up-card" src="../static/images/idcard_frond.png" mode=""></image>
 			</view>
 			<view class="list" v-show="!p_flag" @click="chooseImageTap" :data-flag="positive">
 				<image class="up-card" :src="p_url" :data-src="p_url" @click="chooseImageTap" :data-flag="positive" style="width:279rpx;height:183rpx;"></image>
-				<image class="watermark" src="../../static/image/water.png" mode=""></image>
+				<image class="watermark" src="../static/images/water.png" mode=""></image>
 			</view>
-			<view class="list" v-show="r_flag" @click="chooseImageTap" :data-flag="reverse"><image class="up-card" src="../../static/image/idcard_end.png" mode=""></image></view>
+			<view class="list" v-show="r_flag" @click="chooseImageTap" :data-flag="reverse"><image class="up-card" src="../static/images/idcard_end.png" mode=""></image></view>
 			<view class="list" v-show="!r_flag" @click="chooseImageTap" :data-flag="reverse">
 				<image class="up-card" :src="r_url" :data-src="r_url" @click="chooseImageTap" :data-flag="reverse" style="width:279rpx;height:183rpx;"></image>
-				<image class="watermark" src="../../static/image/water.png" mode=""></image>
+				<image class="watermark" src="../static/images/water.png" mode=""></image>
 			</view>
 		</view>
 
@@ -62,7 +62,6 @@ export default {
 			r_flag: true,
 			p_url: '',
 			r_url: '',
-			shade: false,
 			isClick: true
 		};
 	},
@@ -224,7 +223,9 @@ export default {
 										return false;
 									}
 									if (res.statusCode == 200) {
-										that.shade = true;
+										uni.redirectTo({
+											url:'../indentity_success/indentity_success?name='+ that.name + '&idcard=' + that.idcard
+										})
 									}
 								}
 							});
@@ -341,7 +342,7 @@ page {
 	ime-mode: disabled;
 	font-size: 30rpx;
 	font-weight: 400;
-	color: #c5c5c5;
+	// color: #c5c5c5;
 	display: block;
 	float: left;
 	margin-top: 30rpx;

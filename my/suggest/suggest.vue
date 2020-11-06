@@ -13,14 +13,13 @@
 		</view>
 		<view class="line_colu padding">反馈内容</view>
 		<view class="record_area">
-			<textarea value="" placeholder="请输入您要反馈的内容.." placeholder-class="ph_cl" />
-			<view class="words_num">{{ num_words }}/{{ num_all_word }}</view>
+			<textarea :value="feed_content" @input="getDataNum" placeholder="请输入您要反馈的内容.." placeholder-class="ph_cl" />
+			<view class="words_num">{{ conterNum }}/{{ num_all_word }}</view>
 		</view>
 		<view class="line_colu padding">联系电话</view>
-		<view class="phone_area padding"><input type="number" value="" placeholder="请输入您的手机号" placeholder-class="ph_cl" /></view>
+		<view class="phone_area padding"><input type="number" :value="phone" @input="getPhone" placeholder="请输入您的手机号" placeholder-class="ph_cl" /></view>
 		<view>
-			<view class="btn" @click="pwd_login" v-if="allowLogin_pwd">注册</view>
-			<view class="btn_" v-else>注册</view>
+			<view class="btn" @click="submit" >提交</view>
 		</view>
 	</view>
 </template>
@@ -30,52 +29,22 @@ import uniNavBar from '../../components/uni-nav-bar/uni-nav-bar.vue';
 export default {
 	data() {
 		return {
-			flag: false,
-			hidden: true,
-			title: '',
-			desc: '',
-			messages: '',
-			id: '',
+			conterNum: '0',
+			title:'1',
+			feed_content:'',			
 			add_time: '',
 			ischeck: false,
 			markList: ['功能异常', '优化建议', '其他反馈'],
 			n:0,
 			num_all_word: 200,
-			num_words: 0
+			phone:''
 		};
 	},
 	components: {
 		uniNavBar
 	},
 	onLoad() {
-		var _this = this;
-		uni.request({
-			url: this.url + 'advicefeedback/',
-			method: 'GET',
-			data: {
-				title: this.title,
-				message: this.desc
-			},
-			header: {
-				Authorization: 'JWT' + ' ' + this.global_.token
-			},
-			success(res) {
-				if (res.data.data == '') {
-					_this.flag = true;
-				} else {
-					_this.flag = false;
-				}
-				_this.messages = res.data.data;
-				for (let i = 0; i < _this.messages.length; i++) {
-					var t = _this.messages[i].add_time;
-					var t1 = t.substr(0, 10) + '  ' + t.substr(11, 8);
-					_this.messages[i].add_time = t1;
-					var up = _this.messages[i].updated_time;
-					var up1 = up.substr(0, 10) + '  ' + up.substr(11, 8);
-					_this.messages[i].updated_time = up1;
-				}
-			}
-		});
+		
 	},
 	onBackPress(option) {
 		plus.key.hideSoftKeybord();
@@ -84,89 +53,55 @@ export default {
 		changeList(index) {
 			this.n = index;
 		},
-		moveHandle: function(e) {
-			e.preventDefault();
-			e.stopPropagation();
+		getDataNum(e){
+			this.conterNum=e.detail.cursor;
+			this.feed_content=e.detail.value;
 		},
-		getTitleContent: function(e) {
-			this.title = e.detail.value;
+		getPhone(e){
+			this.phone=e.detail.value;
 		},
-		getDescContent: function(e) {
-			this.desc = e.detail.value;
-		},
-		addMessage: function() {
-			this.hidden = false;
-		},
-		close: function() {
-			this.hidden = true;
-		},
-		back: function() {
-			uni.navigateBack({
-				delta: 1
-			});
-		},
+		
 		submit: function() {
 			var _this = this;
-			if (this.title == '') {
+			if (this.feed_content == '') {
 				uni.showToast({
-					title: '标题不能为空',
-					icon: 'none',
-					duration: 2000
-				});
-				return false;
-			}
-			if (this.desc == '') {
-				uni.showToast({
-					title: '请描述您的问题',
+					title: '请输入您要反馈的内容',
 					icon: 'none',
 					duration: 2000
 				});
 				return false;
 			}
 			uni.request({
-				url: this.url + 'advicefeedback/',
+				url: this.url + 'advicefeedbacks/',
 				method: 'POST',
 				data: {
-					title: this.title,
-					message: this.desc
+					title:this.title,
+					message:this.feed_content
 				},
 				header: {
-					Authorization: 'JWT' + ' ' + this.global_.token
+					Authorization: 'JWT' + ' ' + uni.getStorageSync('token')
 				},
 				success(res) {
 					if (res.statusCode == 200) {
-						_this.hidden = true;
-						_this.title = '';
-						_this.desc = '';
+						uni.redirectTo({
+							url:'../helping/helping'
+						})
 						uni.showToast({
-							title: '提交成功',
-							icon: 'none',
-							duration: 2000
-						});
+							title:"提交成功",
+							icon:'none',
+							duration:3000
+						})
 					} else {
 						uni.showToast({
-							title: '请输入文字信息',
+							title: '提交失败',
 							icon: 'none',
 							duration: 2000
 						});
 					}
-					var page = getCurrentPages().pop();
-					if (page == undefined || page == null) return;
-					page.onLoad();
+					
 				}
 			});
 		},
-		detail: function(item) {
-			var mes = JSON.stringify(item);
-			uni.navigateTo({
-				url: '../suggest-detail/suggest-detail?message=' + mes
-			});
-		},
-		identity: function() {
-			uni.navigateTo({
-				url: '../identity/identity'
-			});
-		}
 	}
 };
 </script>
@@ -184,7 +119,7 @@ page {
 	height: 82rpx;
 	background-color: #f6f6f6;
 	line-height: 82rpx;
-	font-size: 24rpx;
+	font-size: 30rpx;
 	font-weight: 500;
 	color: #333333;
 }
@@ -225,12 +160,14 @@ page {
 	box-sizing: border-box;
 	position: relative;
 }
+.record_area>textarea{
+	font-weight: normal;
+}
 .words_num {
 	position: absolute;
 	right: 42rpx;
 	bottom: 16rpx;
 	font-size: 30rpx;
-	font-weight: 500;
 	color: #c5c5c5;
 }
 .phone_area {

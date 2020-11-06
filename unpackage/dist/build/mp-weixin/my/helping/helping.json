@@ -1,0 +1,6 @@
+{
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "load-refresh": "/components/load-refresh/load-refresh"
+  }
+}

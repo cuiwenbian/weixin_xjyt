@@ -11,13 +11,15 @@
 var _App = _interopRequireDefault(__webpack_require__(/*! ./App */ 5));
 
 
-var _api = _interopRequireDefault(__webpack_require__(/*! request/api.js */ 11));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var wTitleBar = function wTitleBar() {__webpack_require__.e(/*! require.ensure | components/w-titleBar/w-titleBar */ "components/w-titleBar/w-titleBar").then((function () {return resolve(__webpack_require__(/*! components/w-titleBar/w-titleBar.vue */ 260));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};_vue.default.component('wTitleBar', wTitleBar);
+var _api = _interopRequireDefault(__webpack_require__(/*! request/api.js */ 11));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var wTitleBar = function wTitleBar() {__webpack_require__.e(/*! require.ensure | components/w-titleBar/w-titleBar */ "components/w-titleBar/w-titleBar").then((function () {return resolve(__webpack_require__(/*! components/w-titleBar/w-titleBar.vue */ 412));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};_vue.default.component('wTitleBar', wTitleBar);
 
 _vue.default.config.productionTip = false;
 
 _vue.default.prototype.$Api = _api.default; //挂载全局
 _vue.default.prototype.url = 'https://api.ipcn.xyz/api/v1/';
 _vue.default.prototype.urla = 'https://api.ipcn.xyz/';
+// Vue.prototype.url = 'https://apitest.ipcn.xyz/api/v1/'
+// Vue.prototype.url = 'http://192.168.1.158:8000/api/v1/'
 _App.default.mpType = 'app';
 
 var app = new _vue.default(_objectSpread({},
@@ -93,10 +95,27 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default =
 {
   onLaunch: function onLaunch() {
-    console.log('App Launch');
+    var that = this;
+    var times = uni.getStorageSync('nowtime');
+    var setTime = new Date().getTime();
+    if (times) {
+      console.log('当前时间戳' + setTime);
+      console.log('本地存储时间戳' + times);
+      var allTime = setTime - times;
+      console.log('登录使用token时间' + allTime);
+      if (allTime > 1000 * 60 * 21600) {
+        //如果token超过十五天，自动清除token,重新登录
+        console.log('token已过期');
+        uni.removeStorageSync('token');
+        uni.removeStorageSync('phone');
+        uni.removeStorageSync('nowtime');
+      } else {
+        console.log('token未过期');
+      }
+    }
   },
   onShow: function onShow() {
     console.log('App Show');
@@ -104,6 +123,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
   onHide: function onHide() {
     console.log('App Hide');
   } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 /* 8 */

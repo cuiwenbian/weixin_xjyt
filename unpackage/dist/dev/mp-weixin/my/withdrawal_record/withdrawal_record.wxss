@@ -13,7 +13,8 @@ page {
 	-webkit-align-items: center;
 	        align-items: center;
 	padding:0 26rpx;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 }
 .record_icon {
 	width: 14%;
@@ -47,7 +48,8 @@ page {
 	-webkit-flex-wrap: wrap;
 	        flex-wrap: wrap;
 	padding:20rpx 0;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 	border-bottom: 1rpx solid #ECECEC;
 }
 .r {

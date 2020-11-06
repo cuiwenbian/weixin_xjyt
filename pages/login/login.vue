@@ -1,60 +1,64 @@
 <template>
 	<view class="logins">
+		<view :style="{height:statusBarHeight}"></view>
+		<view style="height: 88rpx;display: flex;align-items: center;padding-left: 24rpx;box-sizing: border-box;">
+			<view class="back" @click="back_page"><image src="../../static/image/jj.png" mode=""></image></view>
+		</view>
+		
 		<view class="login_bg">
-			<image  src="../../static/image/login_bg.png" mode=""></image>
+			<image src="../../static/image/login_bg.png" mode=""></image>
 		</view>
 		<view class="login_bg2">
-			<image  src="../../static/image/login_bg2.png" mode=""></image>
+			<image src="../../static/image/login_bg2.png" mode=""></image>
 		</view>
-		<!--  -->
-			<view class="popup">
-				<view class="con">
-					<view class="con_txt">
-						<text :class="['bt-tab', sel_tab === '1' ? 'bt-tab-active' : '']" @click="handleSelectTab('1')">账号登录</text>
-						<span> </span>
-						<text :class="['bt-tab', sel_tab === '2' ? 'bt-tab-active' : '']" @click="handleSelectTab('2')">短信登录</text>
-					</view>
-					<!-- <view class="con_tip">请输入您的常用手机或邮箱</view> -->
-					<view class="inp">
-						<view class="input"><input class="input_num" type="text" v-model="phone_email" placeholder="输入手机号或邮箱" /></view>
-						<view class="input" v-if="sel_tab=='1'">
-							<input v-if="eye" class="input_pwd" password="true" type="text" v-model="password" placeholder="输入密码" @input="getpwd"/>
-							<input v-else class="input_pwd" type="text" v-model="password" placeholder="输入密码" @input="getpwd"/>
-							<view class="eye" v-if="show_eye">
-								<image v-if="eye" src="../../static/image/icon-pass-hide.png" mode="" @click="change"></image>
-								<image v-else src="../../static/image/icon-pass-show.png" mode="" @click="change"></image>
-							</view>
-						</view>
-						<view class="input" v-if="sel_tab=='2'">
-							<input class="input_code" type="text" v-model="code" placeholder="输入验证码" />
-							<view class="code_btn">
-								<button class="getcode" @click="getCodeBtn" :disabled="cutdownIng">{{sendBtnText}}</button>
-							</view>
+		<view class="popup">
+			<view class="con">
+				<view class="con_txt">
+					<text :class="['bt-tab', sel_tab === '1' ? 'bt-tab-active' : '']" @click="handleSelectTab('1')">账号登录</text>
+					<span> </span>
+					<text :class="['bt-tab', sel_tab === '2' ? 'bt-tab-active' : '']" @click="handleSelectTab('2')">短信登录</text>
+				</view>
+				<!-- <view class="con_tip">请输入您的常用手机或邮箱</view> -->
+				<view class="inp">
+					<view class="input"><input class="input_num" type="text" v-model="phone_email" placeholder="输入手机号或邮箱" /></view>
+					<view class="input" v-if="sel_tab=='1'">
+						<input v-if="eye" class="input_pwd" password="true" type="text" v-model="password" placeholder="输入密码" @input="getpwd" />
+						<input v-else class="input_pwd" type="text" v-model="password" placeholder="输入密码" @input="getpwd" />
+						<view class="eye" v-if="show_eye">
+							<image v-if="eye" src="../../static/image/icon-pass-hide.png" mode="" @click="change"></image>
+							<image v-else src="../../static/image/icon-pass-show.png" mode="" @click="change"></image>
 						</view>
 					</view>
-					<view class="forgetpwd" v-if="sel_tab=='1'">
-						<view @click="forget">忘记密码？</view>
-					</view>
-					<view v-if="sel_tab=='2'">
-						<view class="btn"   @click="code_login" v-if="allowLogin">立即登录</view>
-						<view class="btn_"   v-else>立即登录</view>
-					</view>
-					<view v-if="sel_tab=='1'">
-						<view class="btn"  @click="pwd_login" v-if="allowLogin_pwd">立即登录</view>
-						<view class="btn_"   v-else>立即登录</view>
-					</view>
-					<view class="register" v-if="sel_tab=='1'">
-						<view>还没有账号？ <span @click="register" style="color:#3872FF;">去注册</span></view>
+					<view class="input" v-if="sel_tab=='2'">
+						<input class="input_code" type="text" v-model="code" placeholder="输入验证码" />
+						<view class="code_btn">
+							<button class="getcode" @click="getCodeBtn" :disabled="cutdownIng" >{{sendBtnText}}</button>
+						</view>
 					</view>
 				</view>
+				<view class="forgetpwd" v-if="sel_tab=='1'">
+					<view @click="forget">忘记密码？</view>
+				</view>
+				<view v-if="sel_tab=='2'">
+					<view class="btn" @click="code_login" v-if="allowLogin" :class="{active: isActive}" hover-class="actived">立即登录</view>
+					<view class="btn_" v-else>立即登录</view>
+				</view>
+				<view v-if="sel_tab=='1'">
+					<view class="btn" @click="pwd_login" v-if="allowLogin_pwd" hover-class="actived">立即登录</view>
+					<view class="btn_" v-else>立即登录</view>
+				</view>
+				<view class="register" v-if="sel_tab=='1'">
+					<view>还没有账号？ <span @click="register" style="color:#3872FF;">去注册</span></view>
+				</view>
 			</view>
+		</view>
 		<!-- </image> -->
 	</view>
 </template>
 
 <script>
 	const cutdownTime = 60;
-	const cutdownTime_e= 120;
+	const cutdownTime_e = 120;
 	var check = require('../../common/utils.js');
 	export default {
 		data() {
@@ -68,24 +72,40 @@
 				sendBtnText: '获取验证码',
 				type: '',
 				eye: true,
-				show_eye:false
+				show_eye: false,
+				statusBarHeight:'',//状态栏高度
+				
 			};
 		},
+		onLoad(e) {
+			uni.getSystemInfo({
+				success: res=>{
+					this.statusBarHeight = res.statusBarHeight + 'px';
+				}
+			})
+		},
 		computed: {
-			allowLogin () {
+			allowLogin() {
 				return !!(this.phone_email && this.code)
 			},
-			allowLogin_pwd () {
+			allowLogin_pwd() {
 				return !!(this.phone_email && this.password)
 			},
+			
 		},
-		components: {},
+		
 		methods: {
-			getpwd(e){
-				if(e.detail.value!=""){
-					this.show_eye=true
-				}else{
-					this.show_eye=false
+			back_page(){
+				console.log("page")
+				uni.navigateBack({
+					delta:1
+				})
+			},
+			getpwd(e) {
+				if (e.detail.value != "") {
+					this.show_eye = true
+				} else {
+					this.show_eye = false
 				}
 			},
 			handleSelectTab(tab) {
@@ -117,7 +137,7 @@
 					});
 					return false;
 				} else if (myreg.test(this.phone_email)) {
-                    //console.log("手机获取验证码登录")
+					//console.log("手机获取验证码登录")
 					_this.type = 1;
 					uni.request({
 						method: 'POST',
@@ -218,14 +238,14 @@
 						duration: 2000
 					});
 					return false;
-				} else if(!this.code){
+				} else if (!this.code) {
 					uni.showToast({
 						title: '请输入验证码',
 						icon: 'none',
 						duration: 2000
 					});
 					return false;
-				}else if (myreg.test(this.phone_email) || flag) {
+				} else if (myreg.test(this.phone_email) || flag) {
 					uni.request({
 						url: this.url + 'users/emobile/login/',
 						method: 'POST',
@@ -237,14 +257,13 @@
 							'Content-Type': 'application/json'
 						},
 						success: res => {
-							//console.log(res);
 							if (res.statusCode == 400) {
 								uni.showToast({
 									title: '验证码不正确',
 									icon: 'none'
 								});
 							}
-							
+
 							if (res.statusCode == 402) {
 								uni.showToast({
 									title: '用户名或密码错误',
@@ -252,15 +271,12 @@
 									duration: 3000
 								});
 							}
-							
+
 							if (res.statusCode == 200) {
 								let setTime = new Date().getTime();
 								uni.setStorageSync('nowtime', setTime);
 								uni.setStorageSync('phone', _this.phone_email);
 								uni.setStorageSync('token', res.data.data);
-                                //保存登录账号到本地  phone字段
-								_this.global_.phone = uni.getStorageSync('phone');
-								_this.global_.token = uni.getStorageSync('token');
 								uni.reLaunch({
 									url: '../index/index'
 								});
@@ -293,7 +309,7 @@
 						duration: 2000
 					});
 					return false;
-				}else if(!this.password){
+				} else if (!this.password) {
 					uni.showToast({
 						title: '请输入密码',
 						icon: 'none',
@@ -344,9 +360,6 @@
 								uni.setStorageSync('nowtime', setTime);
 								uni.setStorageSync('phone', _this.phone_email);
 								uni.setStorageSync('token', res.data.token);
-
-								_this.global_.phone = uni.getStorageSync('phone');
-								_this.global_.token = uni.getStorageSync('token');
 								uni.reLaunch({
 									url: '../index/index'
 								});
@@ -368,7 +381,7 @@
 	};
 </script>
 
-<style scoped>
+<style scoped lang="less">
 	page {
 		width: 100%;
 		height: 100%;
@@ -378,23 +391,34 @@
 		width: 100%;
 		height: 100%;
 	}
-
+    .back {
+    	width:54rpx;
+		height:52rpx;
+		z-index: 99;
+    }
+	.back>image{
+		width:100%;
+		height:100%;
+		transform: rotate(180deg);
+	}
 	.login_bg {
 		width: 684px;
 		height: 385px;
 		display: block;
 		position: fixed;
-		left:-480rpx;
+		left: -480rpx;
 		top: -220rpx;
 	}
-	.login_bg>image{
-		width:100%;
-		height:100%;
+
+	.login_bg>image {
+		width: 100%;
+		height: 100%;
 	}
+
 	.login_bg2 {
 		display: block;
 		position: fixed;
-		left:-340rpx;
+		left: -340rpx;
 		bottom: -280rpx;
 	}
 
@@ -424,25 +448,32 @@
 	}
 
 	.bt-tab {
+		width: 200rpx;
+		height:80rpx;
+		display: block;
+		float: left;
 		color: #BFBFBF;
 		font-size: 28rpx;
+		text-align: center;
+		line-height: 80rpx;
 	}
 
 	.bt-tab-active {
-        color: #040404;
+		color: #040404;
 		font-size: 48rpx;
 		font-weight: 500;
 		position: relative;
 	}
-	.bt-tab-active:after{
-	   content:"";
-	   width: 11rpx;
-	   height: 11rpx;
-	   background: #0074FF;
-	   border-radius: 50%;
-	   position: absolute;
-	   bottom:-15rpx;
-	   left: 46%;
+
+	.bt-tab-active:after {
+		content: "";
+		width: 11rpx;
+		height: 11rpx;
+		background: #0074FF;
+		border-radius: 50%;
+		position: absolute;
+		bottom: -15rpx;
+		left: 46%;
 	}
 
 	.con_tip {
@@ -506,21 +537,26 @@
 		display: flex;
 		align-items: center;
 	}
-    .getcode{
-		background: #FFFFFF;
+
+	.getcode {
+		background: none;
 		border: none;
-		color:#323232;
+		color: #323232;
+		color:#446CFF;
 		font-size: 30rpx;
 		text-align: right;
 	}
-	.getcode::after{
+
+	.getcode::after {
 		border: none;
 	}
+
 	button[disabled] {
 		background: none !important;
 		color: #999999 !important;
 		border: none;
 	}
+
 	.btn {
 		width: 87%;
 		height: 93rpx;
@@ -533,6 +569,12 @@
 		text-align: center;
 		color: #FFFFFF;
 		margin: 99rpx auto 71rpx auto;
+		&.actived{
+			background-color:rgba(0,0,0,.18);
+		}
+	}
+    .active{
+		background: rgba(25, 119, 255, 0.5);
 	}
 	.btn_ {
 		width: 87%;
@@ -546,7 +588,8 @@
 		color: #FFFFFF;
 		margin: 99rpx auto 71rpx auto;
 	}
-    .forgetpwd{
+
+	.forgetpwd {
 		width: 100%;
 		height: 100rpx;
 		margin: 0 auto;
@@ -555,8 +598,9 @@
 		font-weight: 500;
 		color: #3872FF;
 		display: flex;
-		justify-content:flex-end;
+		justify-content: flex-end;
 	}
+
 	.register {
 		width: 87%;
 		height: 50rpx;

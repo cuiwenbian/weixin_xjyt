@@ -17,16 +17,6 @@
 	color: #040404;
 	position: relative;
 }
-.title:after{
-	content:"";
-	width: 11rpx;
-	height: 11rpx;
-	background: #0074FF;
-	border-radius: 50%;
-	position: absolute;
-	bottom:-15rpx;
-	left: 46%;
-}
 
 .int {
 	width: 628rpx;

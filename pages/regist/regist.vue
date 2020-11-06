@@ -1,5 +1,9 @@
 <template>
 	<view class="logins">
+		<view :style="{ height: statusBarHeight }"></view>
+		<view style="height: 88rpx;display: flex;align-items: center;padding-left: 24rpx;box-sizing: border-box;">
+			<view class="back" @click="back_page"><image src="../../static/image/jj.png" mode=""></image></view>
+		</view>
 		<view class="login_bg"><image src="../../static/image/login_bg.png" mode=""></image></view>
 		<view class="login_bg2"><image src="../../static/image/login_bg2.png" mode=""></image></view>
 		<!--  -->
@@ -14,13 +18,13 @@
 				<view class="inp">
 					<view class="input" v-if="sel_tab == '1'"><input class="input_num" type="text" v-model="phone_email" placeholder="请输入手机号" /></view>
 					<view class="input" v-if="sel_tab == '2'"><input class="input_num" type="text" v-model="phone_email" placeholder="请输入邮箱" /></view>
-					<view class="input" >
+					<view class="input">
 						<input class="input_code" type="text" v-model="code" placeholder="请输入验证码" />
 						<view class="code_btn">
 							<button class="getcode" @click="getCodeBtn" :disabled="cutdownIng">{{ sendBtnText }}</button>
 						</view>
 					</view>
-					<view class="input" >
+					<view class="input">
 						<input v-if="eye" class="input_pwd" password="true" type="text" v-model="password" placeholder="请输入密码" @input="getpwd" />
 						<input v-else class="input_pwd" type="text" v-model="password" placeholder="请输入密码" @input="getpwd" />
 						<view class="eye" v-if="show_eye">
@@ -28,7 +32,6 @@
 							<image v-else src="../../static/image/icon-pass-show.png" mode="" @click="change"></image>
 						</view>
 					</view>
-					
 				</view>
 				<view v-if="sel_tab == '2'">
 					<view class="btn" @click="code_login" v-if="allowLogin">注册</view>
@@ -66,8 +69,16 @@ export default {
 			sendBtnText: '获取验证码',
 			type: '',
 			eye: true,
-			show_eye: false
+			show_eye: false,
+			statusBarHeight: '' //状态栏高度
 		};
+	},
+	onLoad(e) {
+		uni.getSystemInfo({
+			success: res => {
+				this.statusBarHeight = res.statusBarHeight + 'px';
+			}
+		});
 	},
 	computed: {
 		allowLogin() {
@@ -79,6 +90,11 @@ export default {
 	},
 	components: {},
 	methods: {
+		back_page() {
+			uni.navigateBack({
+				delta: 1
+			});
+		},
 		getpwd(e) {
 			if (e.detail.value != '') {
 				this.show_eye = true;
@@ -255,8 +271,8 @@ export default {
 							uni.setStorageSync('phone', _this.phone_email);
 							uni.setStorageSync('token', res.data.data);
 							//保存登录账号到本地  phone字段
-							_this.global_.phone = uni.getStorageSync('phone');
-							_this.global_.token = uni.getStorageSync('token');
+							//_this.global_.phone = uni.getStorageSync('phone');
+							//_this.global_.token = uni.getStorageSync('token');
 							uni.reLaunch({
 								url: '../index/index'
 							});
@@ -274,7 +290,14 @@ export default {
 			}
 		},
 		//密码登录
-		pwd_login() {
+		pwd_login(){
+			uni.showToast({
+				title:'暂停注册功能',
+				icon:'none',
+				duration:2000
+			})
+		},
+		pwd_login_() {
 			var _this = this;
 			//console.log('密码登录')
 			var flag = check.checkEmail(this.phone_email);
@@ -372,6 +395,18 @@ page {
 	height: 100%;
 }
 
+.back {
+	width: 54rpx;
+	height: 52rpx;
+	z-index: 99;
+}
+
+.back > image {
+	width: 100%;
+	height: 100%;
+	transform: rotate(180deg);
+}
+
 .login_bg {
 	width: 684px;
 	height: 385px;
@@ -380,10 +415,12 @@ page {
 	left: -480rpx;
 	top: -220rpx;
 }
+
 .login_bg > image {
 	width: 100%;
 	height: 100%;
 }
+
 .login_bg2 {
 	display: block;
 	position: fixed;
@@ -417,8 +454,14 @@ page {
 }
 
 .bt-tab {
+	width: 200rpx;
+	height: 80rpx;
+	display: block;
+	float: left;
 	color: #bfbfbf;
 	font-size: 28rpx;
+	text-align: center;
+	line-height: 80rpx;
 }
 
 .bt-tab-active {
@@ -427,6 +470,7 @@ page {
 	font-weight: 500;
 	position: relative;
 }
+
 .bt-tab-active:after {
 	content: '';
 	width: 11rpx;
@@ -498,21 +542,25 @@ page {
 	display: flex;
 	align-items: center;
 }
+
 .getcode {
-	background: #ffffff;
+	background: none;
 	border: none;
-	color: #0074FF;
+	color: #0074ff;
 	font-size: 30rpx;
 	text-align: right;
 }
+
 .getcode::after {
 	border: none;
 }
+
 button[disabled] {
 	background: none !important;
 	color: #999999 !important;
 	border: none;
 }
+
 .btn {
 	width: 87%;
 	height: 93rpx;
@@ -526,6 +574,7 @@ button[disabled] {
 	font-weight: 600;
 	margin: 99rpx auto 71rpx auto;
 }
+
 .btn_ {
 	width: 87%;
 	height: 93rpx;
@@ -538,6 +587,7 @@ button[disabled] {
 	line-height: 93rpx;
 	margin: 99rpx auto 71rpx auto;
 }
+
 .forgetpwd {
 	width: 100%;
 	height: 100rpx;
@@ -549,6 +599,7 @@ button[disabled] {
 	display: flex;
 	justify-content: flex-end;
 }
+
 .register {
 	width: 87%;
 	height: 50rpx;

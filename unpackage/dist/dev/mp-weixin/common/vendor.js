@@ -904,7 +904,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"VUE_APP_NAME":"星际云通","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -1954,6 +1954,15 @@ var api = _http.default;var _default =
   },
   getRotation: function getRotation(data) {
     return api.request('home/rotation/', 'GET', data, true);
+  },
+  getRotationDetail: function getRotationDetail(data) {
+    return api.request('home/rotation/details/', 'PUT', data, false);
+  },
+  getAounce: function getAounce(data) {
+    return api.request('home/', 'GET', data, true);
+  },
+  getAounceDetail: function getAounceDetail(data) {
+    return api.request('home/userhome/details/', 'GET', data, false);
   } };exports.default = _default;
 
 /***/ }),
@@ -1967,7 +1976,8 @@ var api = _http.default;var _default =
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var BASE_URL = "https://api.ipcn.xyz/api/v1/"; //公共请求头
-var TOKEN = uni.getStorageSync('TOKEN'); //TOKEN
+// const BASE_URL = "http://192.168.1.158:8000/api/v1/"
+var TOKEN = uni.getStorageSync('token'); //TOKEN
 
 var request = function request(url, method, data) {var ispath = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
   return new Promise(function (resolve, reject) {
@@ -1976,7 +1986,7 @@ var request = function request(url, method, data) {var ispath = arguments.length
       data: ispath ? data : '',
       method: method,
       header: {
-        Authorization: 'JWT' + ' ' + TOKEN //自定义请求头信息
+        //Authorization: 'JWT' + ' ' + TOKEN //自定义请求头信息
       },
       success: function success(res) {
         if (res.statusCode == 200) {
@@ -2033,6 +2043,7 @@ function timer(that) {
     clearInterval(setTimer);
   });
 }
+
 function checkEmail(email) {
   var str = /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/;
   if (str.test(email)) {
@@ -2080,6 +2091,7 @@ var formatMonth = function formatMonth(data) {
   var month = data.getMonth() + 1;
   return month;
 };
+
 function renderTime(date) {
   var dateee = new Date(date).toJSON();
   return new Date(+new Date(dateee) + 8 * 3600 * 1000).toISOString().replace(/T/g, ' ').replace(/\.[\d]{3}Z/, '');
@@ -2108,11 +2120,18 @@ function debounce(fn) {var wait = arguments.length > 1 && arguments[1] !== undef
   };
 }
 
-
+function checkPassword(password) {
+  var str = /^\d{6}$/;
+  if (str.test(password)) {
+    return true;
+  } else {
+    return false;
+  }
+}
 module.exports = {
   checkEmail: checkEmail,
   checkPhoneNum: checkPhoneNum,
-  // checkPassword: checkPassword,
+  checkPassword: checkPassword,
   checkIdcard: checkIdcard,
   timer: timer,
   formatTime: formatTime,
@@ -7648,7 +7667,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"VUE_APP_NAME":"星际云通","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -7669,14 +7688,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"VUE_APP_NAME":"星际云通","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"VUE_APP_NAME":"星际云通","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -7762,7 +7781,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = this.$shouldDiffData === false ? data : diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"VUE_APP_NAME":"星际云通","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -8211,18 +8230,261 @@ module.exports = g;
 
 /***/ }),
 
-/***/ 60:
+/***/ 487:
+/*!*************************************************************************!*\
+  !*** E:/云相册/星际云通小程序/weixin_xjyt/components/uni-swipe-action/mpother.js ***!
+  \*************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
+  data: function data() {
+    return {
+      uniShow: false,
+      left: 0 };
+
+  },
+  computed: {
+    moveLeft: function moveLeft() {
+      return "translateX(".concat(this.left, "px)");
+    } },
+
+  watch: {
+    show: function show(newVal) {
+      if (this.autoClose) return;
+      if (newVal) {
+        this.$emit('change', true);
+        this.open();
+      } else {
+        this.$emit('change', false);
+        this.close();
+      }
+      uni.$emit('__uni__swipe__event', this);
+    } },
+
+  onReady: function onReady() {
+    this.init();
+    this.getSelectorQuery();
+  },
+  beforeDestoy: function beforeDestoy() {
+    uni.$off('__uni__swipe__event');
+  },
+  methods: {
+    init: function init() {var _this = this;
+      uni.$on('__uni__swipe__event', function (res) {
+        if (res !== _this && _this.autoClose) {
+          if (_this.left !== 0) {
+            _this.close();
+          }
+        }
+      });
+    },
+    onClick: function onClick(index, item) {
+      this.$emit('click', {
+        content: item,
+        index: index });
+
+    },
+    touchstart: function touchstart(e) {var
+
+      pageX =
+      e.touches[0].pageX;
+      if (this.disabled) return;
+      var left = this.position[0].left;
+      uni.$emit('__uni__swipe__event', this);
+      this.width = pageX - left;
+      if (this.isopen) return;
+      if (this.uniShow) {
+        this.uniShow = false;
+        this.isopen = true;
+        this.openleft = this.left + this.position[1].width;
+      }
+    },
+    touchmove: function touchmove(e, index) {
+      if (this.disabled) return;var
+
+      pageX =
+      e.touches[0].pageX;
+      this.setPosition(pageX);
+    },
+    touchend: function touchend() {
+      if (this.disabled) return;
+      if (this.isopen) {
+        this.move(this.openleft, 0);
+        return;
+      }
+      this.move(this.left, -40);
+    },
+    setPosition: function setPosition(x, y) {
+      if (!this.position[1].width) {
+        return;
+      }
+      // const width = this.position[0].width
+      this.left = x - this.width;
+      this.setValue(x - this.width);
+    },
+    setValue: function setValue(value) {
+      // 设置最大最小值
+      this.left = Math.max(-this.position[1].width, Math.min(parseInt(value), 0));
+      this.position[0].left = this.left;
+      if (this.isopen) {
+        this.openleft = this.left + this.position[1].width;
+      }
+    },
+    move: function move(left, value) {
+      if (left >= value) {
+        this.$emit('change', false);
+        this.close();
+      } else {
+        this.$emit('change', true);
+        this.open();
+      }
+    },
+    open: function open() {
+      this.uniShow = true;
+      this.left = -this.position[1].width;
+      this.setValue(-this.position[1].width);
+    },
+    close: function close() {var _this2 = this;
+      this.uniShow = true;
+      this.setValue(0);
+      setTimeout(function () {
+        _this2.uniShow = false;
+        _this2.isopen = false;
+      }, 200);
+    },
+    getSelectorQuery: function getSelectorQuery() {var _this3 = this;
+      var views = uni.createSelectorQuery().
+      in(this);
+      views.
+      selectAll('.selector-query-hock').
+      boundingClientRect(function (data) {
+        _this3.position = data;
+        if (_this3.autoClose) return;
+        if (_this3.show) {
+          _this3.open();
+        } else {
+          _this3.close();
+        }
+      }).
+      exec();
+    } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+
+/***/ 488:
+/*!********************************************************************!*\
+  !*** E:/云相册/星际云通小程序/weixin_xjyt/components/uni-swipe-action/mp.js ***!
+  \********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
+  data: function data() {
+    return {
+      position: [],
+      button: [] };
+
+  },
+  computed: {
+    pos: function pos() {
+      return JSON.stringify(this.position);
+    },
+    btn: function btn() {
+      return JSON.stringify(this.button);
+    } },
+
+  watch: {
+    show: function show(newVal) {
+      if (this.autoClose) return;
+      var valueObj = this.position[0];
+      if (!valueObj) return;
+      valueObj.show = newVal;
+      this.$set(this.position, 0, valueObj);
+    } },
+
+
+
+
+
+
+
+
+
+  onReady: function onReady() {
+    this.init();
+    this.getSize();
+    this.getButtonSize();
+  },
+
+  methods: {
+    init: function init() {var _this = this;
+      uni.$on('__uni__swipe__event', function (res) {
+        if (res !== _this && _this.autoClose) {
+          var valueObj = _this.position[0];
+          valueObj.show = false;
+          _this.$set(_this.position, 0, valueObj);
+        }
+      });
+    },
+    openSwipe: function openSwipe() {
+      uni.$emit('__uni__swipe__event', this);
+    },
+    change: function change(e) {
+      this.$emit('change', e.open);
+      var valueObj = this.position[0];
+      valueObj.show = e.open;
+      this.$set(this.position, 0, valueObj);
+      // console.log('改变', e);
+    },
+    onClick: function onClick(index, item) {
+      this.$emit('click', {
+        content: item,
+        index: index });
+
+    },
+    getSize: function getSize() {var _this2 = this;
+      var views = uni.createSelectorQuery().in(this);
+      views.
+      selectAll('.selector-query-hock').
+      boundingClientRect(function (data) {
+        if (_this2.autoClose) {
+          data[0].show = false;
+        } else {
+          data[0].show = _this2.show;
+        }
+        _this2.position = data;
+      }).
+      exec();
+    },
+    getButtonSize: function getButtonSize() {var _this3 = this;
+      var views = uni.createSelectorQuery().in(this);
+      views.
+      selectAll('.button-hock').
+      boundingClientRect(function (data) {
+        _this3.button = data;
+      }).
+      exec();
+    } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+
+/***/ 84:
 /*!**********************************************************!*\
   !*** ./node_modules/@babel/runtime/regenerator/index.js ***!
   \**********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! regenerator-runtime */ 61);
+module.exports = __webpack_require__(/*! regenerator-runtime */ 85);
 
 /***/ }),
 
-/***/ 61:
+/***/ 85:
 /*!************************************************************!*\
   !*** ./node_modules/regenerator-runtime/runtime-module.js ***!
   \************************************************************/
@@ -8253,7 +8515,7 @@ var oldRuntime = hadRuntime && g.regeneratorRuntime;
 // Force reevalutation of runtime.js.
 g.regeneratorRuntime = undefined;
 
-module.exports = __webpack_require__(/*! ./runtime */ 62);
+module.exports = __webpack_require__(/*! ./runtime */ 86);
 
 if (hadRuntime) {
   // Restore the original runtime.
@@ -8270,7 +8532,7 @@ if (hadRuntime) {
 
 /***/ }),
 
-/***/ 62:
+/***/ 86:
 /*!*****************************************************!*\
   !*** ./node_modules/regenerator-runtime/runtime.js ***!
   \*****************************************************/

@@ -6,7 +6,8 @@ page {
 	width: 100%;
 	height: 120rpx;
 	padding: 0 34rpx;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 	background-color: #FFFFFF;
 }
 .infoo {
@@ -35,7 +36,8 @@ page {
 .avator {
 	width: 48rpx;
 	height: 48rpx;
-	border-radius: 50%;
+	-webkit-border-radius: 50%;
+	        border-radius: 50%;
 }
 .pic {
 	display: block;

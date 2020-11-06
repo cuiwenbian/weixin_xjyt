@@ -1,5 +1,5 @@
 {
-    "name" : "xjyt_wx",
+    "name" : "星际云通",
     "appid" : "__UNI__E3B30C0",
     "description" : "",
     "versionName" : "1.0.0",
@@ -57,9 +57,9 @@
     "quickapp" : {},
     /* 小程序特有相关 */
     "mp-weixin" : {
-        "appid" : "",
+        "appid" : "wxc62459b2d6b1d7f6",
         "setting" : {
-            "urlCheck" : false
+            "urlCheck" : true
         },
         "usingComponents" : true
     },

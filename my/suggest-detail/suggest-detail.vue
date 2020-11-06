@@ -2,18 +2,23 @@
 	<!-- 反馈详情 -->
 	<view class="container" style="position: relative;">
 		<view class="t"></view>
-		<view class="suggest-list">
+		<view v-if="show_record">
+			<view class="no_Record">
+				<image src="../../static/image/no-machine.png" mode=""></image>
+				<view class="norecord">您还没有反馈记录哦~</view>
+			</view>
+		</view>
+		<view class="suggest-list" v-for="(item,index) in record_list" v-else>
 			<view class="question">
-				<view class="answer1">字形充满了整个字面框，整个字体向右边倾斜，左 边有细长的延伸线，整个字形看上去就像飞奔而去 的运动员，非常适用于品牌广告和产品包装设计。</view>
+				<view class="answer1">{{item.message}}</view>
 			</view>
-			<view class="question"><view class="answer">回复：好的</view></view>
+			<view class="question" v-if="item.reply"><view class="answer">回复：{{item.reply}}</view></view>
 			<view class="time">
-				<view class="submit-time">提交时间：{{ message.add_time }}</view>
-				<view class="status">已提交</view>
-				<view class="status" v-show="message.company_submit == 1">已提交</view>
-				<view class="status" v-show="message.company_submit == 2">已回复</view>
+				<view class="submit-time">提交时间：{{item.add_time}}</view>
+				<view class="status" v-if="item.user_submit==0">已提交</view>
+				<view class="status" style='color:#FFC706;' v-else-if='item.user_submit==2'>已回复</view>
+			    <view class="status" v-else>未回复</view>
 			</view>
-			<view class="t"></view>
 		</view>
 	</view>
 </template>
@@ -23,15 +28,65 @@ export default {
 	data() {
 		return {
 			hidden: true,
-			message: ''
+			message: '',
+			record_list: '',
+			show_record: false,
+			shade: false
 		};
 	},
-	onLoad(options) {
-		var a = options.message;
-		var b = JSON.parse(a);
-		this.message = b;
-		if (this.message.reply != null) {
-			this.hidden = false;
+	onLoad() {
+		this.getAllRecord();
+	},
+	onShow() {
+		this.getAllRecord();
+	},
+
+	methods: {
+		getAllRecord() {
+			var that = this;
+			uni.request({
+				url: this.url + 'advicefeedbacks/',
+				method: 'GET',
+
+				header: {
+					Authorization: 'JWT' + ' ' + uni.getStorageSync('token')
+				},
+				success(res) {
+					console.log(res)
+					that.record_list = res.data.data.reverse();
+					if (that.record_list.length == 0) {
+						that.show_record = true;
+					}
+				}
+			});
+		},
+		back() {
+			uni.navigateBack({
+				delta: 1
+			});
+		},
+		clearall() {
+			this.shade = true;
+		},
+		cancel() {
+			this.shade = false;
+		},
+		//清空所有记录
+		sure() {
+			var that = this;
+			uni.request({
+				url: this.url + 'advicedeleteall/',
+				method: 'DELETE',
+				header: {
+					Authorization: 'JWT' + ' ' + uni.getStorageSync('token')
+				},
+				success(res) {
+					if (res.statusCode == 200) {
+						that.shade = false;
+						that.getAllRecord();
+					}
+				}
+			});
 		}
 	}
 };
@@ -39,7 +94,7 @@ export default {
 
 <style>
 page {
-	background: #edeeee;
+	background: #f6f6f6;
 }
 .t {
 	height: 30rpx;
@@ -48,11 +103,22 @@ page {
 	width: 100%;
 	height: auto;
 	background: #fff;
-	padding: 20rpx 48rpx;
+	padding: 20rpx 48rpx 40rpx;
 	overflow: hidden;
 	box-sizing: border-box;
+	position: relative;
 }
-.question:first-child{
+.suggest-list:after{
+	content:'';
+	position: absolute;
+	bottom:-40rpx;
+	left:0;
+	width:100%;
+	height:60rpx;
+	background-color: #F6F6F6;
+	
+}
+.question:first-child {
 	border-bottom: 1rpx solid #f2f2f2;
 }
 .question {
@@ -74,7 +140,7 @@ page {
 	font-size: 30rpx;
 	font-weight: 300;
 	line-height: 50rpx;
-	color:#333333;
+	color: #333333;
 	word-break: break-all;
 	word-wrap: break-word;
 }
@@ -89,12 +155,28 @@ page {
 }
 .submit-time {
 	font-size: 24rpx;
-	color: #B0B0B0;
+	color: #b0b0b0;
 	font-weight: 500;
 }
 .status {
 	font-size: 24rpx;
 	font-weight: 500;
-	color: #446CFF;
+	color: #446cff;
+}
+.no_Record {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+.no_Record > image {
+	width: 300rpx;
+	height: 240rpx;
+	display: block;
+	margin-top: 304rpx;
+}
+.norecord {
+	line-height: 70rpx;
 }
 </style>

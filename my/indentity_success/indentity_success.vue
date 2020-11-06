@@ -8,11 +8,11 @@
 		<view class="authentication_information">
 			<view class="listline">
 				<view class="labeler">真实姓名：</view>
-				<view class="name">李晓超</view>
+				<view class="name">{{name}}</view>
 			</view>
 			<view class="listline">
 				<view class="labeler">身份证号：</view>
-				<view class="name">410221189566454</view>
+				<view class="name">{{idcard}}</view>
 			</view>
 		</view>
 		<view class="tips">
@@ -22,6 +22,18 @@
 </template>
 
 <script>
+	export default{
+		data(){
+			return{
+				name:'',
+				idcard:''
+			}
+		},
+		onLoad(option) {
+			this.name=option.name;
+			this.idcard=option.idcard;
+		}
+	}
 </script>
 
 <style>

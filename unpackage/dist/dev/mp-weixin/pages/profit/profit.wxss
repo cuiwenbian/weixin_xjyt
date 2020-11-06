@@ -1,7 +1,8 @@
 
 .peofit_con{
 	padding: 8rpx 24rpx;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 }
 .pro_banner{
 	width: 100%;
@@ -17,7 +18,8 @@
 	width: 100%;
 	height: 284rpx;
 	padding:60rpx 69rpx;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: flex;
@@ -48,7 +50,8 @@
 	width: 157rpx;
 	height: 54rpx;
 	background:rgba(224, 246, 255, .47);
-	border-radius: 27rpx;
+	-webkit-border-radius: 27rpx;
+	        border-radius: 27rpx;
 	position: absolute;
 	right: 67rpx;
 	bottom:58rpx;

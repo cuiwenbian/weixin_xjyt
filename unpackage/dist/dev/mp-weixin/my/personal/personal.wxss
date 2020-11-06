@@ -1,125 +1,132 @@
-
 page {
-	background: #f6f6f6;
+  background: #f6f6f6;
 }
 .l {
-	width: 100%;
-	height: 120rpx;
-	padding: 0 34rpx;
-	box-sizing: border-box;
-	background-color: #FFFFFF;
+  width: 100%;
+  height: 120rpx;
+  padding: 0 34rpx;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  background-color: #FFFFFF;
 }
 .infoo {
-	float: left;
-	width: 100%;
-	height: 100%;
-	display: -webkit-box;
-	display: -webkit-flex;
-	display: flex;
-	-webkit-box-pack: justify;
-	-webkit-justify-content: space-between;
-	        justify-content: space-between;
-	border-bottom: 1px solid #eee;
-	-webkit-box-align: center;
-	-webkit-align-items: center;
-	        align-items: center;
-	font-size: 30rpx;
-	font-weight: 500;
-	color: #333333;
+  float: left;
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  border-bottom: 1px solid #eee;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  font-size: 30rpx;
+  font-weight: 500;
+  color: #333333;
 }
 .info_d {
-	display: -webkit-box;
-	display: -webkit-flex;
-	display: flex;
-	-webkit-box-pack: justify;
-	-webkit-justify-content: space-between;
-	        justify-content: space-between;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
 }
 .info_d > view {
-	margin-right: 42rpx;
+  margin-right: 42rpx;
 }
 .right-go {
-	width: 36rpx;
-	height: 36rpx;
+  width: 36rpx;
+  height: 36rpx;
 }
 .s-line {
-	width: 100%;
-	height: 20rpx;
-	background: #eee;
+  width: 100%;
+  height: 20rpx;
+  background: #eee;
 }
 .avator {
-	width: 100rpx;
-	height: 100rpx;
-	border-radius: 50%;
+  width: 100rpx;
+  height: 100rpx;
+  -webkit-border-radius: 50%;
+          border-radius: 50%;
 }
 .pic {
-	display: block;
-	width: 100%;
-	height: 100%;
+  display: block;
+  width: 100%;
+  height: 100%;
 }
-.logout{
-	width: 100%;
-	height: 120rpx;
-	background-color: #FFFFFF;
-	text-align: center;
-	line-height: 120rpx;
-	font-size: 36rpx;
-	font-weight: 500;
-	color: #3072F7;
+.logout {
+  width: 100%;
+  height: 120rpx;
+  background-color: #FFFFFF;
+  text-align: center;
+  line-height: 120rpx;
+  font-size: 36rpx;
+  font-weight: 500;
+  color: #3072F7;
+}
+.logout.actived {
+  background-color: rgba(0, 0, 0, 0.18);
 }
 .shade {
-		width: 100%;
-		height: 100%;
-		background: rgba(0, 0, 0, 0.4);
-		position: fixed;
-		left: 0;
-		top: 0;
-		z-index: 99;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 99;
 }
 .pop {
-		width: 636rpx;
-		height: 368rpx;
-		margin: 450rpx auto;
-		padding: 47rpx 40rpx 48rpx;
-		box-sizing: border-box;
-		background: #fff;
-		border-radius: 5rpx;
+  width: 636rpx;
+  height: 368rpx;
+  margin: 450rpx auto;
+  padding: 47rpx 40rpx 48rpx;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  background: #fff;
+  -webkit-border-radius: 5rpx;
+          border-radius: 5rpx;
 }
 .tips {
-		text-align: center;
-		font-size: 30rpx;
-		color: #333333;
-		font-weight: bold;
+  text-align: center;
+  font-size: 30rpx;
+  color: #333333;
+  font-weight: bold;
 }
 .pop-title {
-		height: 160rpx;
-		line-height: 160rpx;
-		text-align: center;
-		font-size: 28rpx;
-		color: #666666;
+  height: 160rpx;
+  line-height: 160rpx;
+  text-align: center;
+  font-size: 28rpx;
+  color: #666666;
 }
 .pops {
-		height: 100rpx;
-		width: 100%;
-		display: -webkit-box;
-		display: -webkit-flex;
-		display: flex;
-		-webkit-box-pack: justify;
-		-webkit-justify-content: space-between;
-		        justify-content: space-between;
+  height: 100rpx;
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
 }
 .pop-btn {
-		width: 260rpx;
-		height: 72rpx;
-		border-radius: 5rpx;
-		line-height: 72rpx;
-		font-size: 26rpx;
-		color: #666666;
-		background: #cacaca;
-		text-align: center;
+  width: 260rpx;
+  height: 72rpx;
+  -webkit-border-radius: 5rpx;
+          border-radius: 5rpx;
+  line-height: 72rpx;
+  font-size: 26rpx;
+  color: #666666;
+  background: #cacaca;
+  text-align: center;
 }
 .yess {
-		background: #41bec9;
-		color: #ffffff;
+  background: #41bec9;
+  color: #ffffff;
 }
 

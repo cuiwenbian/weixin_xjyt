@@ -3,7 +3,7 @@
 	<view>
 		<uni-nav-bar left-icon="back" :title="tit" :fixed="true" :status-bar="true" @click-left="back" background-color="#FAFBFC"
 		 color="#000000"></uni-nav-bar>
-		<image class="img-logo" src="../../static/image/message_logo.png" mode=""></image>
+		<!-- <image class="img-logo" src="../../static/image/message_logo.png" mode=""></image> -->
 		<view class="art_con">
 			<view class="art_tit">
 				{{title}}
@@ -60,7 +60,7 @@
 			this.title = option.title;
 			console.log(option.title.length)
 			if(option.title.length>6){
-				this.tit = option.title.substring(0, 6) + '...';
+				this.tit = option.title.substring(0, 10) + '...';
 			}else{
 				this.tit = option.title
 			}
@@ -101,7 +101,7 @@
 							that.add = res.data.data[0].add_time;
 							that.title = res.data.data[0].title;
 							if(that.title.length>6){
-								that.tit = that.title.substring(0, 6) + '...';
+								that.tit = that.title.substring(0, 10) + '...';
 							}else{
 								that.tit = that.title
 							}

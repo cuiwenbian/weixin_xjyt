@@ -2,21 +2,22 @@
 	<view>
 		<uni-drawer ref="drawer"></uni-drawer>
 		<wTitleBar title="星际云通" textColor="#fff" @open="hendleclick"></wTitleBar>
-		<carousel :img-list="imgList" url-key="cover_pic" @selected="selectedBanner" />
+		<view style="height: 20rpx;"></view>
+		<view class="back_index"><bw-swiper style="width:100%;height:310rpx;position: absolute;top:0rpx;"></bw-swiper></view>
 		<view class="content">
 			<view class="ban_btns">
-				<view class="machine_btn" @click="mymachine">
+				<view class="machine_btn" @click="mymachine" hover-class="active">
 					<image src="../../static/image/machine_icon.png" style="width:70rpx;height:56rpx;" mode=""></image>
 					<view>我的服务器</view>
 				</view>
-				<view class="machine_btn" @click="mypower">
+				<view class="machine_btn" @click="mypower" hover-class="active">
 					<image src="../../static/image/power_icon.png" style="width:77rpx;height:49rpx;" mode=""></image>
 					<view>我的存力</view>
 				</view>
 			</view>
 			<view class="bulletin_board">
 				<image src="../../static/image/aounce.png" style="width:86rpx;height:32rpx;" mode=""></image>
-				<view class="announcement_txt">公告标题显示在这里，公告标题最多50个字符公告标题最多</view>
+				<view class="announcement_txt"><anNoticeBar color="#282828" fontSize="40px" bgColor="rgba(255,255,255,0)" switchTime="3" @go="go"></anNoticeBar></view>
 				<image src="../../static/image/more.png" style="width:32rpx;height:26rpx;" mode="" @click="more_announcement"></image>
 			</view>
 		</view>
@@ -28,28 +29,28 @@
 			</view>
 			<view class="newsList">
 				<view class="item_list" @click="information(item.id)" v-for="(item, index) in title" :key="index">
-					<image :src=" item.cover_pic" mode=""></image>
+					<image :src="item.cover_pic" mode=""></image>
 					<view class="news_info">
 						<view class="news_info_title">
 							<view class="num_box">
 								<image class="number_img" src="../../static/image/number_tip.png" mode=""></image>
-								<view class="news_len">{{index+1}}</view>
+								<view class="news_len">{{ index + 1 }}</view>
 							</view>
-							<view>{{ item.title }}</view>
+							<view class="title_ss">{{ item.title }}</view>
 						</view>
-						<view class="news_info_con">{{ item.essay_describe}}</view>
+						<view class="news_info_con">{{ item.essay_describe }}</view>
 					</view>
 				</view>
-				
 			</view>
 		</view>
 	</view>
 </template>
 
 <script>
-import carousel from '@/components/vear-carousel/vear-carousel';
+import bwSwiper from '@/colorui/components/swiper.vue';
 import { debounce } from '@/common/utils.js';
 import uniDrawer from '@/components/uni-drawer/uni-drawer.vue';
+import anNoticeBar from '@/components/an-notice-bar.vue';
 let dragBox;
 export default {
 	data() {
@@ -62,21 +63,24 @@ export default {
 				pulldown: true
 			},
 			imgList: [],
-			title:''
+			title: '',
+			token: uni.getStorageSync('token')
 		};
 	},
 	onReady() {
 		dragBox = this.$refs.dragBox;
 	},
 	components: {
-		carousel,
-		uniDrawer
+		bwSwiper,
+		uniDrawer,
+		anNoticeBar
 	},
+	computed: {},
 	onLoad() {
 		this.$Api.getNews().then(
 			res => {
 				console.log(res);
-				this.title = res.data.data.lists.slice(0, 2);
+				this.title = res.data.data.lists.slice(0, 5);
 			},
 			err => {}
 		);
@@ -87,6 +91,9 @@ export default {
 			},
 			err => {}
 		);
+	},
+	onHide() {
+		this.$refs.drawer.close();
 	},
 	methods: {
 		selectedBanner(item, index) {
@@ -124,9 +131,18 @@ export default {
 		},
 		linkToTransfer: debounce(
 			function() {
-				uni.navigateTo({
-					url: '../../my/power/power'
-				});
+				if (!this.token) {
+					uni.showToast({
+						title: '请先登录您的账号',
+						duration: 3000,
+						icon: 'none'
+					});
+					return;
+				} else {
+					uni.navigateTo({
+						url: '../../my/power/power'
+					});
+				}
 			},
 			1000,
 			true
@@ -139,9 +155,18 @@ export default {
 		},
 		linkToTransfer1: debounce(
 			function() {
-				uni.navigateTo({
-					url: '../../my/machine/machine'
-				});
+				if (!this.token) {
+					uni.showToast({
+						title: '请先登录您的账号',
+						duration: 3000,
+						icon: 'none'
+					});
+					return;
+				} else {
+					uni.navigateTo({
+						url: '../../my/machine/machine'
+					});
+				}
 			},
 			1000,
 			true
@@ -172,18 +197,9 @@ export default {
 		),
 		linkToTransfer4: debounce(
 			function(item) {
-				
-				this.$Api.getNewsDetail(item).then(
+				let data = item;
+				this.$Api.getNewsDetail(data).then(
 					res => {
-						console.log("qewe")
-						console.log("新闻详情"+res);
-					},
-					err => {}
-				);
-				/* uni.request({
-					url: this.BASE_URL + 'home/news/details/' + item + '/',
-					method: 'PUT',
-					success: res => {
 						var ingym = res.data.data;
 						this.coo = ingym.text_content;
 						var link2 = ingym.link;
@@ -193,16 +209,16 @@ export default {
 						var title = ingym.title;
 						if (link2 == null || link2 == '') {
 							uni.navigateTo({
-								url: '../banner2/banner2?volume=' + read_volume + '&cont=' + encodeURIComponent(text_content2) + '&add=' +
-									add_time + '&title=' + title
+								url: '../banner2/banner2?volume=' + read_volume + '&cont=' + encodeURIComponent(text_content2) + '&add=' + add_time + '&title=' + title
 							});
 						} else {
 							uni.navigateTo({
 								url: `../web2/web2?url=${link2}`
 							});
 						}
-					}
-				}); */
+					},
+					err => {}
+				);
 			},
 			500,
 			true
@@ -210,6 +226,82 @@ export default {
 		information: function(item) {
 			this.linkToTransfer4(item);
 		},
+		linkToTransfer5: debounce(
+			function(id) {
+				var that = this;
+				let data = id;
+				this.$Api.getRotationDetail(data).then(res => {
+					var link = res.data.data[0].link;
+					var add_time = res.data.data[0].add_time;
+					var title = res.data.data[0].title;
+					var text_content = res.data.data[0].text_content.replace(/=/g, '_');
+					var prev_qus = res.data.data[1].title;
+					var prev_id = res.data.data[1].id;
+					var next_id = res.data.data[2].id;
+					var next_qus = res.data.data[2].title;
+					if (link == null || link == '') {
+						uni.setStorageSync('index-banner-content', text_content);
+						uni.navigateTo({
+							url:
+								'../banner/banner?add_time=' +
+								add_time +
+								'&title=' +
+								title +
+								'&prev_qus=' +
+								prev_qus +
+								'&prev_id=' +
+								prev_id +
+								'&next_qus=' +
+								next_qus +
+								'&next_id=' +
+								next_id
+						});
+					} else {
+						uni.navigateTo({
+							url: `../web1/web1?url=${link}`
+						});
+					}
+				});
+				/* uni.request({
+						url: this.url + 'home/rotation/details/' + item + '/',
+						method: 'PUT',
+						success(res) {
+							console.log(res);
+							var link = res.data.data[0].link;
+							var add_time = res.data.data[0].add_time;
+							var title=res.data.data[0].title;
+							var text_content = res.data.data[0].text_content.replace(/=/g, '_');
+							var prev_qus = res.data.data[1].title;
+							var prev_id = res.data.data[1].id;
+							var next_id = res.data.data[2].id;
+							var next_qus = res.data.data[2].title;
+							if (link == null || link == '') {
+								uni.setStorageSync('index-banner-content', text_content);
+								uni.navigateTo({
+									url: '../banner/banner?add_time='+add_time+'&title=' + title+'&prev_qus=' + prev_qus+'&prev_id=' + prev_id+'&next_qus=' + next_qus+'&next_id=' + next_id
+								});
+							} else {
+								uni.navigateTo({
+									url: `../web1/web1?url=${link}`
+								});
+							}
+						}
+					}); */
+			},
+			500,
+			true
+		),
+		some: function(item) {
+			let id = item.id;
+			this.linkToTransfer5(id);
+		},
+		go: function(e) {
+			//console.log(e)
+			var id = parseInt(e);
+			uni.navigateTo({
+				url: '../banner3/banner3?id=' + id
+			});
+		}
 	}
 };
 </script>
@@ -219,6 +311,17 @@ export default {
 	padding: 0 40rpx;
 	box-sizing: border-box;
 }
+.back_index {
+	width: 100%;
+	height: 310rpx;
+	position: relative;
+	margin-bottom: 20rpx;
+}
+.back_index >image{
+	width:100%;
+	height:100%;
+	display: block;
+}
 .ban_btns {
 	width: 100%;
 	padding: 14rpx 0 31rpx 0;
@@ -226,6 +329,7 @@ export default {
 	display: flex;
 	justify-content: space-between;
 }
+
 .machine_btn {
 	width: 324rpx;
 	height: 85rpx;
@@ -235,10 +339,19 @@ export default {
 	align-items: center;
 	color: #222222;
 	font-size: 30rpx;
+	&.active {
+		background-color: rgba(0, 0, 0, 0.1);
+	}
 }
+
 .machine_btn > image {
 	margin-left: 22rpx;
 	margin-right: 19rpx;
+}
+.machine_btn > view {
+	font-size: 30rpx;
+	font-weight: 400;
+	color: #222222;
 }
 .bulletin_board {
 	padding-bottom: 31rpx;
@@ -246,53 +359,63 @@ export default {
 	display: flex;
 	align-items: center;
 }
+
 .announcement_txt {
 	width: 521rpx;
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
-	font-size: 24rpx;
+	// font-size: 24rpx;
 	font-weight: 500;
 	margin-left: 9rpx;
 	margin-right: 41rpx;
 }
+
 .line {
 	width: 100%;
 	height: 20rpx;
 	background-color: #f8f6fc;
 }
+
 .latest_development_of {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	padding: 34rpx 0 42rpx 0;
+
 	view {
 		font-size: 34rpx;
 		font-weight: 800;
 		color: #333333;
 	}
+
 	image {
 		width: 37rpx;
 		height: 37rpx;
 		display: block;
 	}
 }
+
 .newsList {
 	width: 100%;
 	height: auto;
+
 	.item_list {
 		height: 134rpx;
 		margin-bottom: 28rpx;
 		display: flex;
+
 		image {
 			width: 133rpx;
 			height: 134rpx;
 			display: block;
 		}
+
 		.news_info {
 			margin-left: 13rpx;
 			width: 78%;
 		}
+
 		.news_info_title {
 			display: flex;
 			font-size: 30rpx;
@@ -300,14 +423,18 @@ export default {
 			color: #333333;
 			margin-top: 4rpx;
 		}
+
 		.num_box {
 			position: relative;
 		}
+
 		.number_img {
 			width: 70rpx;
 			height: 67rpx;
 			display: block;
+			margin-right: 20rpx;
 		}
+
 		.news_len {
 			width: 70rpx;
 			height: 67rpx;
@@ -321,11 +448,13 @@ export default {
 			color: #fff;
 			z-index: 99;
 		}
-		.news_info_title > view {
+
+		.news_info_title > .title_ss {
 			overflow: hidden;
 			white-space: nowrap;
 			text-overflow: ellipsis;
 		}
+
 		.news_info_con {
 			padding-left: 10rpx;
 			box-sizing: border-box;

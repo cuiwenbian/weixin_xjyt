@@ -4,7 +4,7 @@
     "ignore": []
   },
   "setting": {
-    "urlCheck": false,
+    "urlCheck": true,
     "es6": true,
     "enhance": false,
     "postcss": true,
@@ -29,15 +29,15 @@
       "outputPath": ""
     },
     "useIsolateContext": true,
-    "useCompilerModule": false,
+    "useCompilerModule": true,
     "userConfirmedUseCompilerModuleSwitch": false,
     "packNpmManually": false,
     "packNpmRelationList": []
   },
   "compileType": "miniprogram",
   "libVersion": "",
-  "appid": "touristappid",
-  "projectname": "xjyt_wx",
+  "appid": "wxc62459b2d6b1d7f6",
+  "projectname": "%E6%98%9F%E9%99%85%E4%BA%91%E9%80%9A",
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},
   "condition": {

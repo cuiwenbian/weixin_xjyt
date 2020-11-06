@@ -1,9 +1,11 @@
 
 .cmd-circle {
-  display: inline-block;
-  box-sizing: border-box;
-  list-style: none;
-  margin: 0;
-  padding: 0;
+    display: inline-block;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+	z-index: 999;
 }
 

@@ -9,16 +9,131 @@
 		<view class="line1">地址信息</view>
 		<view class="info_input">
 			<view class="name">
-				<input style="width: 88%;" type="text" value="" placeholder="请输入地址" />
-				<image src="../../static/image/scan_code2.png" mode=""></image>
+				<input style="width: 88%;" type="text" :value="adr" @input="getAddress"  placeholder="请输入地址" />
+				<!-- <image src="../../static/image/scan_code2.png" mode=""></image> -->
 			</view>
-			<view class="name"><input type="text" value="" placeholder="备注" /></view>
+			<view class="name"><input type="text" :value="remark" @input="getRemark"  placeholder="备注" /></view>
 		</view>
-		<view class="save">保存</view>
+		<view class="save" @click="save">保存</view>
 	</view>
 </template>
 
-<script></script>
+<script>
+	export default {
+		data() {
+			return {
+				adr: '',
+				remark: '',
+				// flag: '',
+				isClick:true
+			}
+		},
+		onLoad(option) {
+			// this.flag = option.flag
+		},
+		onBackPress(option) {
+			plus.key.hideSoftKeybord()
+		},
+		computed: {
+			allowLogin () {
+				return !!(this.adr && this.remark)
+			},
+		},
+		methods: {
+			getAddress: function(e) {
+				this.adr = e.detail.value
+			},
+			getRemark: function(e) {
+				this.remark = e.detail.value
+			},
+			save: function() {
+				var that=this;
+				if (this.adr == '') {
+					uni.showToast({
+						title: '地址不能为空',
+						icon: 'none',
+						duration: 2000
+					})
+					return false
+				}
+				if (this.adr.length <= 32) {
+					uni.showToast({
+						title: '地址最少32位',
+						icon: 'none',
+						duration: 2000
+					})
+					return false
+				}
+				if (this.remark == "") {
+					uni.showToast({
+						title: '备注名称不能为空',
+						icon: 'none',
+						duration: 2000
+					})
+					return false
+				}
+				if(this.isClick){
+					that.isClick = false;
+					uni.request({
+						url: this.url + 'walletaddresss/',
+						method: 'POST',
+						data: {
+							wallet_key: this.remark,
+							wallet_value: this.adr
+						},
+						header: {
+							Authorization: 'JWT' + ' ' + uni.getStorageSync('token')
+						},
+						success(res) {
+							if (res.statusCode == 202) {
+								uni.showToast({
+									title: '地址格式不正确(只能是字母或数字)',
+									icon: 'none',
+									duration: 2000
+								})
+								return false
+							}
+							if (res.statusCode == 204) {
+								uni.showToast({
+									title: '昵称不可重复',
+									icon: 'none',
+									duration: 2000
+								})
+								return false
+							}
+							if (res.statusCode == 205) {
+								uni.showToast({
+									title: '地址不合法',
+									icon: 'none',
+									duration: 2000
+								})
+								return false
+							}
+							if (res.statusCode == 200) {
+								uni.navigateBack({
+									delta: 1
+								})
+								uni.showToast({
+									title: '添加成功',
+									icon: 'none',
+									duration: 1500
+								})
+							}
+						},
+						complete() {
+							that.isClick = true;
+						},
+						fail() {
+							that.isClick = true;
+						}
+					})
+				}
+				
+				
+			}
+		}
+	}
+</script>
 
 <style>
 page {

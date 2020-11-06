@@ -1,6 +1,7 @@
 <template>
 	<view class="content">
 		<load-refresh ref="loadRefresh" :isRefresh="true" :refreshTime="800" :heightReduce="0" :pageNo="currPage" :totalPageNo="totalPage" @loadMore="loadMore" @refresh="refresh">
+			<view slot="content-list">
 			<view class="newsList">
 				<view class="item_list" @click="information(item.id)" v-for="(item, index) in list" :key="index">
 					<image :src="item.cover_pic" mode=""></image>
@@ -10,11 +11,12 @@
 								<image class="number_img" src="../../static/image/number_tip.png" mode=""></image>
 								<view class="news_len">{{ index + 1 }}</view>
 							</view>
-							<view>{{ item.title }}</view>
+							<view class="title_ss">{{ item.title }}</view>
 						</view>
 						<view class="news_info_con">{{ item.essay_describe }}</view>
 					</view>
 				</view>
+			</view>
 			</view>
 		</load-refresh>
 	</view>
@@ -137,6 +139,7 @@ export default {
 .content {
 	padding: 0 40rpx;
 	box-sizing: border-box;
+	background-color: #FFFFFF;
 }
 .newsList {
 	width: 100%;
@@ -164,6 +167,8 @@ export default {
 		}
 		.num_box {
 			position: relative;
+			width: 70rpx;
+			margin-right: 10rpx;
 		}
 		.number_img {
 			width: 70rpx;
@@ -183,7 +188,7 @@ export default {
 			color: #fff;
 			z-index: 99;
 		}
-		.news_info_title > view {
+		.news_info_title > .title_ss {
 			overflow: hidden;
 			white-space: nowrap;
 			text-overflow: ellipsis;

@@ -43,7 +43,8 @@
   width: 100%;
 }
 .load-refresh .hollow-dots-spinner.data-v-2cb7ba04 {
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 .load-refresh .hollow-dots-spinner.data-v-2cb7ba04 {
   height: 100rpx;
@@ -54,7 +55,8 @@
   height: 10px;
   margin: 0 calc(10px / 2);
   border: calc(10px / 5) solid #04C4C4;
-  border-radius: 50%;
+  -webkit-border-radius: 50%;
+          border-radius: 50%;
   float: left;
   -webkit-transform: scale(0);
           transform: scale(0);

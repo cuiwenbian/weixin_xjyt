@@ -13,7 +13,7 @@
 			</view>
 		</view>
 		<view class="no_record" v-else>
-			<image src="../../static/image/help_img.png" mode=""></image>
+			<image src="../../static/image/no_Record.png" mode=""></image>
 			<view>暂无记录~</view>
 		</view>
 	</view>
@@ -24,7 +24,7 @@
 		data(){
 			return{
 				n:2,
-				hasRecord:true
+				hasRecord:false
 			}
 		}
 	}

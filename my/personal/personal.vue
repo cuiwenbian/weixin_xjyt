@@ -18,7 +18,7 @@
 			</view>
 		</view>
 		<view class="s-line"></view>
-		<view class="logout"  @click="logout">退出登录</view>
+		<view class="logout"  @click="logout" hover-class="actived">退出登录</view>
 		<view class="shade" v-if="shade" @touchmove.stop.prevent="moveHandle">
 			<view class="pop">
 				<view class="tips">提示</view>
@@ -36,7 +36,7 @@
 export default {
 	data() {
 		return {
-			nickname: '232',
+			nickname: '星际云通',
 			shade: false,
 		};
 	},
@@ -62,14 +62,14 @@ export default {
 			uni.removeStorageSync('token');
 			uni.removeStorageSync('nowtime');
 			uni.reLaunch({
-				url: '../../pages/login/login'
+				url: '../../pages/index/index'
 			});
 		},
 	}
 };
 </script>
 
-<style>
+<style lang="less">
 page {
 	background: #f6f6f6;
 }
@@ -131,6 +131,9 @@ page {
 	font-size: 36rpx;
 	font-weight: 500;
 	color: #3072F7;
+	&.actived{
+		background-color: rgba(0,0,0,.18);
+	}
 }
 .shade {
 		width: 100%;

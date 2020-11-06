@@ -20,6 +20,12 @@
 		},
 		onLoad() {
 			var that = this;
+			this.$Api.getAounce().then(
+				res => {
+					that.announcement = res.data;
+				},
+				err => {}
+			);
 			uni.request({
 				url: this.url + 'home/',
 				method: 'GET',

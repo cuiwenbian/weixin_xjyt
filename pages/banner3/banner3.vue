@@ -1,13 +1,17 @@
 <!-- 公告 -->
 <template>
 	<view>
-		<!-- <uni-nav-bar left-icon="back"  :title="txt" :fixed="true" :status-bar="true"  @click-left="back"  background-color="#FAFBFC" color="#000000" ></uni-nav-bar> -->
-		<image class="img-logo" src="../../static/image/message_logo.png" mode=""></image>
 		<view class="art_con">
 			<view class="art_tit">
 				{{title}}
 			</view>
-			<view class="art_time">{{add}}</view>
+			<view class="art_time">
+				<view class="avator_img"><image src="../../static/image/title_logo.png" mode=""></image></view>
+			    <view class="descc">
+					<view class="gg">星际云通官方</view>
+					<view class="tt">{{add}}</view>
+				</view>
+			</view>
 			<view class="conten">
 				<rich-text :nodes="aa"></rich-text>
 			</view>
@@ -58,22 +62,20 @@
 			},
 			getNews(){
 				var that=this;
-				uni.request({
-					url: this.url + 'home/userhome/details/' + this.id + '/',
-					method: 'GET',
-					success(res) {
+				var id=this.id;
+				this.$Api.getAounceDetail(id).then(
+					res => {
 						that.title=res.data.data[0].title;
-						that.txt=res.data.data[0].title.substring(0,6)+'...';
+						that.txt=res.data.data[0].title.substring(0,10)+'...';
 						that.aa=res.data.data[0].text_content;
 						that.add=res.data.data[0].add_time;
 						that.prev_info=res.data.data[1].title;
 						that.prev_id=res.data.data[1].id;
 						that.next_info=res.data.data[2].title;
 						that.next_id=res.data.data[2].id;
-						
 					},
-					
-				});
+					err => {}
+				);
 			},
 			prev(){
 				this.id=this.prev_id;
@@ -123,12 +125,40 @@
 	
 	.art_time {
 		width: 100%;
-		height: 82rpx;
-		line-height: 82rpx;
-		font-size: 21rpx;
+		height: 112rpx;
+		padding-bottom: 30rpx;
+		margin-top: 20rpx;
+		box-sizing: border-box;
+		font-size: 24rpx;
 		color: #999999;
-		text-align: right;
 		border-bottom: 1rpx solid #EBEBEB;
+		display: flex;
+		align-items: center;
+	}
+	.avator_img{
+		width: 65rpx;
+		height:65rpx;
+	}
+	.avator_img>image{
+		width:100%;
+		height:100%;
+	}
+	.descc{
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-around;
+		margin-left: 20rpx;
+	}
+	.gg{
+		font-size: 26rpx;
+		font-weight: 800;
+		color: #333333;
+	}
+	.tt{
+		font-size: 18rpx;
+		font-weight: 400;
+		color: #CECECE;
 	}
 	.conten{
 		margin-top: 30rpx;
